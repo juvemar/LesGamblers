@@ -29,6 +29,17 @@
         </div>
     </div>
     <div class="container body-content">
+        @if (this.TempData["Notification"] != null)
+        {
+            <div id="nitificationSuccess" class="panel panel-success col-md-8 col-md-offset-2 text-center" style="background-color: #43AC6A;">
+                <div class="panel-heading">
+                    <div class="panel-title">
+                        @this.TempData["Notification"]
+                    </div>
+                </div>
+            </div>
+        }
+        
         @RenderBody()
         <hr />
         <footer>

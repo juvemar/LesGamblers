@@ -8,7 +8,9 @@
     {
         IQueryable<Gambler> GetAll();
 
-        IQueryable<Gambler> GetById(int id);
+        Gambler GetById(string id);
+
+        IQueryable<Gambler> GetByUsername(string username);
 
         void Add(Gambler gambler);
 

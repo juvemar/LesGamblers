@@ -5,6 +5,7 @@
     using Contracts;
     using Data;
     using Models;
+
     public class GamblersService : IGamblersService
     {
         private IRepository<Gambler> gamblers;
@@ -25,9 +26,14 @@
             return this.gamblers.All();
         }
 
-        public IQueryable<Gambler> GetById(int id)
+        public Gambler GetById(string id)
         {
-            return this.gamblers.All().Where(x => x.Id == id).AsQueryable();
+            return this.gamblers.GetById(id);
+        }
+
+        public IQueryable<Gambler> GetByUsername(string username)
+        {
+            return this.gamblers.All().Where(u => u.UserName == username).AsQueryable();
         }
 
         public void UpdateGambler(int id)

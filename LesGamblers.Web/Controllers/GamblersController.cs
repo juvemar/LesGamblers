@@ -1,17 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-
-namespace LesGamblers.Web.Controllers
+﻿namespace LesGamblers.Web.Controllers
 {
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Web.Mvc;
+
+    using LesGamblers.Services.Contracts;
+    using LesGamblers.Web.Models.Gamblers;
+
     public class GamblersController : Controller
     {
-        [HttpGet]
-        public ActionResult ListGamblers()
+        private IGamblersService gamblers;
+
+        public GamblersController(IGamblersService gamblers)
         {
-            return View();
+            this.gamblers = gamblers;
+        }
+
+        [HttpGet]
+        public ActionResult ListGamblersResults()
+        {
+            var allGamblers = this.gamblers
+                            .GetAll()
+                            .OrderBy(g => g.TotalPoints)
+                            .ToList();
+
+            var gamblersModel = new List<ListGamblersViewModel>();
+
+            foreach (var gambler in allGamblers)
+            {
+                var newGambler = new ListGamblersViewModel()
+                {
+                    Username = gambler.Username,
+                    FirstName = gambler.FirstName,
+                    LastName = gambler.LastName,
+                    TotalPoints = gambler.TotalPoints,
+                    FinalResultsPredicted = gambler.FinalResultsPredicted,
+                    GoalscorerPredicted = gambler.GoalscorerPredicted,
+                    SignsPredicted = gambler.SignsPredicted
+                };
+
+                gamblersModel.Add(newGambler);
+            }
+
+            return this.View(gamblersModel);
         }
     }
 }

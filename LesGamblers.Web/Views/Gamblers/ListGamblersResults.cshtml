@@ -1,0 +1,66 @@
+﻿@model IEnumerable<LesGamblers.Web.Models.ListGamblersViewModel>
+
+@{
+    ViewBag.Title = "ListGamblersResults";
+}
+
+<h2>ListGamblersResults</h2>
+
+@*<p>
+    @if (this.User.Identity.IsAuthenticated)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalPoints)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinalResultsPredicted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SignPredicted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GoalscorerPredicted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalPoints)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinalResultsPredicted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SignPredicted)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GoalscorerPredicted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

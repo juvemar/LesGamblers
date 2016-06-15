@@ -205,6 +205,7 @@
     <Compile Include="Controllers\GamblersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PredictionsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,8 +213,9 @@
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ListGamblersViewModel.cs" />
+    <Compile Include="Models\Gamblers\ListGamblersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Predictions\AddPredictionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -277,10 +279,11 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Gamblers\ListGamblersResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Gamblers\" />
+    <Folder Include="Views\Predictions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -298,6 +301,10 @@
     <ProjectReference Include="..\LesGamblers.Models\LesGamblers.Models.csproj">
       <Project>{d379f462-1333-4046-8aeb-8d1f7dbf62ee}</Project>
       <Name>LesGamblers.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LesGamblers.Services\LesGamblers.Services.csproj">
+      <Project>{9b7e0dd9-6e98-4c32-9300-1ea0fa0ebaa6}</Project>
+      <Name>LesGamblers.Services</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

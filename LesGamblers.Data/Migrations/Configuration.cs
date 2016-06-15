@@ -5,6 +5,8 @@ namespace LesGamblers.Data.Migrations
     using System.Linq;
 
     using Models;
+    using Microsoft.AspNet.Identity.EntityFramework;
+    using Microsoft.AspNet.Identity;
 
     public sealed class Configuration : DbMigrationsConfiguration<LesGamblers.Data.LesGamblersDbContext>
     {
@@ -16,6 +18,8 @@ namespace LesGamblers.Data.Migrations
 
         protected override void Seed(LesGamblers.Data.LesGamblersDbContext context)
         {
+            SeedRoles(context);
+
             if (context.Gamblers.Count() == 0)
             {
                 SeedGamblers(context);
@@ -25,6 +29,39 @@ namespace LesGamblers.Data.Migrations
             {
                 SeedGames(context);
             }
+        }
+
+        private void SeedRoles(LesGamblersDbContext context)
+        {
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<Gambler>(new UserStore<Gambler>(context));
+
+            userManager.PasswordValidator = new MinimumLengthValidator(5);
+
+            if (!roleManager.RoleExists("admin"))
+            {
+                roleManager.Create(new IdentityRole("admin"));
+            }
+
+            var user = new Gambler
+            {
+                UserName = "adminGambler",
+                Email = "admin@gmail.com",
+                PhoneNumber = "0888888888",
+                FirstName = "Martin",
+                LastName = "Atanasov"
+            };
+
+            if (userManager.FindByName("admin") == null)
+            {
+                var result = userManager.Create(user, "admin");
+                if (result.Succeeded)
+                {
+                    userManager.AddToRole(user.Id, "admin");
+                }
+            }
+
+            context.SaveChanges();
         }
 
         private void SeedGames(LesGamblersDbContext context)

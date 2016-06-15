@@ -1,7 +1,8 @@
 ﻿namespace LesGamblers.Data
 {
-    using LesGamblers.Models;
     using System.Data.Entity;
+
+    using LesGamblers.Models;
 
     public class LesGamblersDbContext : DbContext
     {
