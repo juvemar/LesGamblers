@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F3F31EEF-3CF2-4B7D-801E-FF7715A9AFA7}</ProjectGuid>
+    <ProjectGuid>{D379F462-1333-4046-8AEB-8D1F7DBF62EE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LesGamblers.Data</RootNamespace>
-    <AssemblyName>LesGamblers.Data</AssemblyName>
+    <RootNamespace>LesGamblers.Models</RootNamespace>
+    <AssemblyName>LesGamblers.Models</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -49,22 +49,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ILesGamblersDbContext.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="LesGamblersDbContext.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="CountryType.cs" />
+    <Compile Include="Gambler.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="IDeletableEntity.cs" />
+    <Compile Include="Prediction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Repository.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\LesGamblers.Models\LesGamblers.Models.csproj">
-      <Project>{d379f462-1333-4046-8aeb-8d1f7dbf62ee}</Project>
-      <Name>LesGamblers.Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

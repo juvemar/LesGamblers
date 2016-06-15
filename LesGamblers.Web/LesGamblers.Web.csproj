@@ -295,7 +295,7 @@
       <Project>{f3f31eef-3cf2-4b7d-801e-ff7715a9afa7}</Project>
       <Name>LesGamblers.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LesGamblers\LesGamblers.Models.csproj">
+    <ProjectReference Include="..\LesGamblers.Models\LesGamblers.Models.csproj">
       <Project>{d379f462-1333-4046-8aeb-8d1f7dbf62ee}</Project>
       <Name>LesGamblers.Models</Name>
     </ProjectReference>
