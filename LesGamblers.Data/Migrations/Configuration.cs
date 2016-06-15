@@ -19,16 +19,8 @@ namespace LesGamblers.Data.Migrations
         protected override void Seed(LesGamblers.Data.LesGamblersDbContext context)
         {
             SeedRoles(context);
-
-            if (context.Gamblers.Count() == 0)
-            {
-                SeedGamblers(context);
-            }
-
-            if (context.Games.Count() == 0)
-            {
-                SeedGames(context);
-            }
+            SeedGamblers(context);
+            SeedGames(context);
         }
 
         private void SeedRoles(LesGamblersDbContext context)
@@ -43,21 +35,21 @@ namespace LesGamblers.Data.Migrations
                 roleManager.Create(new IdentityRole("admin"));
             }
 
-            var user = new Gambler
+            var admin = new Gambler
             {
-                UserName = "adminGambler",
+                UserName = "cheatGambler",
                 Email = "admin@gmail.com",
                 PhoneNumber = "0888888888",
                 FirstName = "Martin",
                 LastName = "Atanasov"
             };
 
-            if (userManager.FindByName("admin") == null)
+            if (userManager.FindByName("cheatGambler") == null)
             {
-                var result = userManager.Create(user, "admin");
+                var result = userManager.Create(admin, "admin123");
                 if (result.Succeeded)
                 {
-                    userManager.AddToRole(user.Id, "admin");
+                    userManager.AddToRole(admin.Id, "admin");
                 }
             }
 
@@ -66,6 +58,11 @@ namespace LesGamblers.Data.Migrations
 
         private void SeedGames(LesGamblersDbContext context)
         {
+            if (context.Games.Count() != 0)
+            {
+                return;
+            }
+
             context.Configuration.LazyLoadingEnabled = true;
 
             var game1 = new Game
@@ -360,6 +357,11 @@ namespace LesGamblers.Data.Migrations
 
         private void SeedGamblers(LesGamblers.Data.LesGamblersDbContext context)
         {
+            if (context.Gamblers.Count() != 0)
+            {
+                return;
+            }
+
             context.Configuration.LazyLoadingEnabled = true;
 
             var gambler1 = new Gambler

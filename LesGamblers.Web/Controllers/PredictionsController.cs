@@ -1,5 +1,6 @@
 ﻿namespace LesGamblers.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
@@ -19,6 +20,31 @@
             this.games = games;
         }
 
+        //[Authorize]
+        [HttpGet]
+        public ActionResult AddPet(AddPredictionViewModel model)
+        {
+            var availableGames = this.games
+                                .GetAll()
+                                .Where(g => string.IsNullOrEmpty(g.FinalResult))
+                                .OrderBy(g => g.Date)
+                                .ToList();
+
+            model.Games = new List<SelectListItem>();
+            foreach (var game in availableGames)
+            {
+                model.Games.Add(new SelectListItem
+                {
+                    Text = game.HostTeam + ":" + game.GuestTeam + " - " + game.Date.ToString("d dd.MM.yyyy"),
+                    Value = game.Id.ToString()
+                });
+            }
+
+            return View();
+        }
+
+        //[Authorize]
+        [HttpPost]
         public ActionResult AddGambler(AddPredictionViewModel model)
         {
             if (!this.ModelState.IsValid)
