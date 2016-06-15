@@ -4,7 +4,7 @@
 
     public class ListGamblersViewModel : IMapFrom<LesGamblers.Models.Gambler>
     {
-        public string Username { get; set; }
+        public string UserName { get; set; }
 
         public string FirstName { get; set; }
 

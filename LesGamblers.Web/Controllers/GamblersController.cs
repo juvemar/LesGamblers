@@ -30,7 +30,7 @@
             {
                 var newGambler = new ListGamblersViewModel()
                 {
-                    Username = gambler.Username,
+                    UserName = gambler.UserName,
                     FirstName = gambler.FirstName,
                     LastName = gambler.LastName,
                     TotalPoints = gambler.TotalPoints,

@@ -2,9 +2,11 @@
 {
     using System.Data.Entity;
 
+    using Microsoft.AspNet.Identity.EntityFramework;
+
     using LesGamblers.Models;
 
-    public class LesGamblersDbContext : DbContext
+    public class LesGamblersDbContext : IdentityDbContext<Gambler>, ILesGamblersDbContext
     {
         public LesGamblersDbContext()
             :base("LesGamblers")
@@ -15,7 +17,7 @@
 
         public virtual IDbSet<Prediction> Predictions { get; set; }
 
-        public virtual IDbSet<Gambler> Gamblers { get; set; }
+        public override IDbSet<Gambler> Users { get; set; }
 
         public static LesGamblersDbContext Create()
         {

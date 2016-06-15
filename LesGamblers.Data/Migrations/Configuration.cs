@@ -4,9 +4,10 @@ namespace LesGamblers.Data.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    using Models;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
+
+    using LesGamblers.Models;
 
     public sealed class Configuration : DbMigrationsConfiguration<LesGamblers.Data.LesGamblersDbContext>
     {
@@ -19,11 +20,11 @@ namespace LesGamblers.Data.Migrations
         protected override void Seed(LesGamblers.Data.LesGamblersDbContext context)
         {
             SeedRoles(context);
-            SeedGamblers(context);
+            SeedUsers(context);
             SeedGames(context);
         }
 
-        private void SeedRoles(LesGamblersDbContext context)
+        private void SeedRoles(LesGamblers.Data.LesGamblersDbContext context)
         {
             var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
             var userManager = new UserManager<Gambler>(new UserStore<Gambler>(context));
@@ -56,7 +57,7 @@ namespace LesGamblers.Data.Migrations
             context.SaveChanges();
         }
 
-        private void SeedGames(LesGamblersDbContext context)
+        private void SeedGames(LesGamblers.Data.LesGamblersDbContext context)
         {
             if (context.Games.Count() != 0)
             {
@@ -69,7 +70,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.France.ToString(),
                 GuestTeam = CountryType.Romania.ToString(),
-                Date = new DateTime(2016, 6, 10)
+                Date = new DateTime(2016, 6, 10, 22, 00, 00)
             };
             context.Games.Add(game1);
 
@@ -77,7 +78,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Albania.ToString(),
                 GuestTeam = CountryType.Switzerland.ToString(),
-                Date = new DateTime(2016, 6, 11)
+                Date = new DateTime(2016, 6, 11, 16, 00, 00)
             };
             context.Games.Add(game2);
 
@@ -85,7 +86,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Wales.ToString(),
                 GuestTeam = CountryType.Slovakia.ToString(),
-                Date = new DateTime(2016, 6, 11)
+                Date = new DateTime(2016, 6, 11, 19, 00, 00)
             };
             context.Games.Add(game3);
 
@@ -93,7 +94,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.England.ToString(),
                 GuestTeam = CountryType.Russia.ToString(),
-                Date = new DateTime(2016, 6, 11)
+                Date = new DateTime(2016, 6, 11, 22, 00, 00)
             };
             context.Games.Add(game4);
 
@@ -101,7 +102,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Poland.ToString(),
                 GuestTeam = CountryType.Northern_Ireland.ToString(),
-                Date = new DateTime(2016, 6, 12)
+                Date = new DateTime(2016, 6, 12, 16, 00, 00)
             };
             context.Games.Add(game5);
 
@@ -109,7 +110,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Germany.ToString(),
                 GuestTeam = CountryType.Ukraine.ToString(),
-                Date = new DateTime(2016, 6, 12)
+                Date = new DateTime(2016, 6, 12, 22, 00, 00)
             };
             context.Games.Add(game6);
 
@@ -117,7 +118,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Turkey.ToString(),
                 GuestTeam = CountryType.Croatia.ToString(),
-                Date = new DateTime(2016, 6, 12)
+                Date = new DateTime(2016, 6, 12, 19, 00, 00)
             };
             context.Games.Add(game7);
 
@@ -125,7 +126,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Spain.ToString(),
                 GuestTeam = CountryType.Czech_Republic.ToString(),
-                Date = new DateTime(2016, 6, 13)
+                Date = new DateTime(2016, 6, 13, 16, 00, 00)
             };
             context.Games.Add(game8);
 
@@ -133,7 +134,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Republic_of_Ireland.ToString(),
                 GuestTeam = CountryType.Sweden.ToString(),
-                Date = new DateTime(2016, 6, 13)
+                Date = new DateTime(2016, 6, 13, 19, 00, 00)
             };
             context.Games.Add(game9);
 
@@ -141,7 +142,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Belgium.ToString(),
                 GuestTeam = CountryType.Italy.ToString(),
-                Date = new DateTime(2016, 6, 13)
+                Date = new DateTime(2016, 6, 13, 22, 00, 00)
             };
             context.Games.Add(game10);
 
@@ -149,7 +150,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Austria.ToString(),
                 GuestTeam = CountryType.Hungary.ToString(),
-                Date = new DateTime(2016, 6, 14)
+                Date = new DateTime(2016, 6, 14, 19, 00, 00)
             };
             context.Games.Add(game11);
 
@@ -157,7 +158,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Portugal.ToString(),
                 GuestTeam = CountryType.Iceland.ToString(),
-                Date = new DateTime(2016, 6, 14)
+                Date = new DateTime(2016, 6, 14, 22, 00, 00)
             };
             context.Games.Add(game12);
 
@@ -165,7 +166,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Romania.ToString(),
                 GuestTeam = CountryType.Switzerland.ToString(),
-                Date = new DateTime(2016, 6, 15)
+                Date = new DateTime(2016, 6, 15, 19, 00, 00)
             };
             context.Games.Add(game13);
 
@@ -173,7 +174,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.France.ToString(),
                 GuestTeam = CountryType.Albania.ToString(),
-                Date = new DateTime(2016, 6, 15)
+                Date = new DateTime(2016, 6, 15, 22, 00, 00)
             };
             context.Games.Add(game14);
 
@@ -181,7 +182,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Russia.ToString(),
                 GuestTeam = CountryType.Slovakia.ToString(),
-                Date = new DateTime(2016, 6, 15)
+                Date = new DateTime(2016, 6, 15, 16, 00, 00)
             };
             context.Games.Add(game15);
 
@@ -189,7 +190,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.England.ToString(),
                 GuestTeam = CountryType.Wales.ToString(),
-                Date = new DateTime(2016, 6, 16)
+                Date = new DateTime(2016, 6, 16, 16, 00, 00)
             };
             context.Games.Add(game16);
 
@@ -197,7 +198,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Ukraine.ToString(),
                 GuestTeam = CountryType.Northern_Ireland.ToString(),
-                Date = new DateTime(2016, 6, 16)
+                Date = new DateTime(2016, 6, 16, 19, 00, 00)
             };
             context.Games.Add(game17);
 
@@ -205,7 +206,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Germany.ToString(),
                 GuestTeam = CountryType.Poland.ToString(),
-                Date = new DateTime(2016, 6, 16)
+                Date = new DateTime(2016, 6, 16, 22, 00, 00)
             };
             context.Games.Add(game18);
 
@@ -213,7 +214,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Czech_Republic.ToString(),
                 GuestTeam = CountryType.Croatia.ToString(),
-                Date = new DateTime(2016, 6, 17)
+                Date = new DateTime(2016, 6, 17, 19, 00, 00)
             };
             context.Games.Add(game19);
 
@@ -221,7 +222,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Spain.ToString(),
                 GuestTeam = CountryType.Turkey.ToString(),
-                Date = new DateTime(2016, 6, 17)
+                Date = new DateTime(2016, 6, 17, 22, 00, 00)
             };
             context.Games.Add(game20);
 
@@ -229,7 +230,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Italy.ToString(),
                 GuestTeam = CountryType.Sweden.ToString(),
-                Date = new DateTime(2016, 6, 17)
+                Date = new DateTime(2016, 6, 17, 16, 00, 00)
             };
             context.Games.Add(game21);
 
@@ -237,7 +238,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Belgium.ToString(),
                 GuestTeam = CountryType.Republic_of_Ireland.ToString(),
-                Date = new DateTime(2016, 6, 18)
+                Date = new DateTime(2016, 6, 18, 16, 00, 00)
             };
             context.Games.Add(game22);
 
@@ -245,7 +246,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Iceland.ToString(),
                 GuestTeam = CountryType.Hungary.ToString(),
-                Date = new DateTime(2016, 6, 18)
+                Date = new DateTime(2016, 6, 18, 19, 00, 00)
             };
             context.Games.Add(game23);
 
@@ -253,7 +254,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Portugal.ToString(),
                 GuestTeam = CountryType.Austria.ToString(),
-                Date = new DateTime(2016, 6, 18)
+                Date = new DateTime(2016, 6, 18, 22, 00, 00)
             };
             context.Games.Add(game24);
 
@@ -261,7 +262,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Romania.ToString(),
                 GuestTeam = CountryType.Albania.ToString(),
-                Date = new DateTime(2016, 6, 19)
+                Date = new DateTime(2016, 6, 19, 22, 00, 00)
             };
             context.Games.Add(game25);
 
@@ -269,7 +270,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Switzerland.ToString(),
                 GuestTeam = CountryType.France.ToString(),
-                Date = new DateTime(2016, 6, 19)
+                Date = new DateTime(2016, 6, 19, 22, 00, 00)
             };
             context.Games.Add(game26);
 
@@ -277,7 +278,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Russia.ToString(),
                 GuestTeam = CountryType.Wales.ToString(),
-                Date = new DateTime(2016, 6, 20)
+                Date = new DateTime(2016, 6, 20, 22, 00, 00)
             };
             context.Games.Add(game27);
 
@@ -285,7 +286,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Slovakia.ToString(),
                 GuestTeam = CountryType.England.ToString(),
-                Date = new DateTime(2016, 6, 20)
+                Date = new DateTime(2016, 6, 20, 22, 00, 00)
             };
             context.Games.Add(game28);
 
@@ -293,7 +294,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Ukraine.ToString(),
                 GuestTeam = CountryType.Poland.ToString(),
-                Date = new DateTime(2016, 6, 21)
+                Date = new DateTime(2016, 6, 21, 19, 00, 00)
             };
             context.Games.Add(game29);
 
@@ -301,7 +302,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Northern_Ireland.ToString(),
                 GuestTeam = CountryType.Germany.ToString(),
-                Date = new DateTime(2016, 6, 21)
+                Date = new DateTime(2016, 6, 21, 19, 00, 00)
             };
             context.Games.Add(game30);
 
@@ -309,7 +310,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Czech_Republic.ToString(),
                 GuestTeam = CountryType.Turkey.ToString(),
-                Date = new DateTime(2016, 6, 21)
+                Date = new DateTime(2016, 6, 21, 22, 00, 00)
             };
             context.Games.Add(game31);
 
@@ -317,7 +318,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Croatia.ToString(),
                 GuestTeam = CountryType.Spain.ToString(),
-                Date = new DateTime(2016, 6, 21)
+                Date = new DateTime(2016, 6, 21, 22, 00, 00)
             };
             context.Games.Add(game32);
 
@@ -325,7 +326,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Italy.ToString(),
                 GuestTeam = CountryType.Republic_of_Ireland.ToString(),
-                Date = new DateTime(2016, 6, 22)
+                Date = new DateTime(2016, 6, 22, 22, 00, 00)
             };
             context.Games.Add(game33);
 
@@ -333,7 +334,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Sweden.ToString(),
                 GuestTeam = CountryType.Belgium.ToString(),
-                Date = new DateTime(2016, 6, 22)
+                Date = new DateTime(2016, 6, 22, 22, 00, 00)
             };
             context.Games.Add(game34);
 
@@ -341,7 +342,7 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Iceland.ToString(),
                 GuestTeam = CountryType.Austria.ToString(),
-                Date = new DateTime(2016, 6, 22)
+                Date = new DateTime(2016, 6, 22, 19, 00, 00)
             };
             context.Games.Add(game35);
 
@@ -349,15 +350,15 @@ namespace LesGamblers.Data.Migrations
             {
                 HostTeam = CountryType.Hungary.ToString(),
                 GuestTeam = CountryType.Portugal.ToString(),
-                Date = new DateTime(2016, 6, 22)
+                Date = new DateTime(2016, 6, 22, 19, 00, 00)
             };
             context.Games.Add(game36);
             context.SaveChanges();
         }
 
-        private void SeedGamblers(LesGamblers.Data.LesGamblersDbContext context)
+        private void SeedUsers(LesGamblers.Data.LesGamblersDbContext context)
         {
-            if (context.Gamblers.Count() != 0)
+            if (context.Users.Count() != 0)
             {
                 return;
             }
@@ -369,119 +370,119 @@ namespace LesGamblers.Data.Migrations
                 FirstName = "Martin",
                 LastName = "Videv"
             };
-            context.Gamblers.Add(gambler1);
+            context.Users.Add(gambler1);
 
             var gambler2 = new Gambler
             {
                 FirstName = "Nikolay",
                 LastName = "Lyubenov"
             };
-            context.Gamblers.Add(gambler2);
+            context.Users.Add(gambler2);
 
             var gambler3 = new Gambler
             {
                 FirstName = "Teodor",
                 LastName = "Todorov"
             };
-            context.Gamblers.Add(gambler3);
+            context.Users.Add(gambler3);
 
             var gambler4 = new Gambler
             {
                 FirstName = "Martin",
                 LastName = "Atanasov"
             };
-            context.Gamblers.Add(gambler4);
+            context.Users.Add(gambler4);
 
             var gambler5 = new Gambler
             {
                 FirstName = "Filip",
                 LastName = "Djalov"
             };
-            context.Gamblers.Add(gambler5);
+            context.Users.Add(gambler5);
 
             var gambler6 = new Gambler
             {
                 FirstName = "Hristian",
                 LastName = "Haralampiev"
             };
-            context.Gamblers.Add(gambler6);
+            context.Users.Add(gambler6);
 
             var gambler7 = new Gambler
             {
                 FirstName = "Velislav",
                 LastName = "Petrov"
             };
-            context.Gamblers.Add(gambler7);
+            context.Users.Add(gambler7);
 
             var gambler8 = new Gambler
             {
                 FirstName = "Yordan",
                 LastName = "Peev"
             };
-            context.Gamblers.Add(gambler8);
+            context.Users.Add(gambler8);
 
             var gambler9 = new Gambler
             {
                 FirstName = "Kaloyan",
                 LastName = "Kirilov"
             };
-            context.Gamblers.Add(gambler9);
+            context.Users.Add(gambler9);
 
             var gambler10 = new Gambler
             {
                 FirstName = "Yulian",
                 LastName = "Velichkov"
             };
-            context.Gamblers.Add(gambler10);
+            context.Users.Add(gambler10);
 
             var gambler11 = new Gambler
             {
                 FirstName = "Veselin",
                 LastName = "Doichev"
             };
-            context.Gamblers.Add(gambler11);
+            context.Users.Add(gambler11);
 
             var gambler12 = new Gambler
             {
                 FirstName = "Martin",
                 LastName = "Vasev"
             };
-            context.Gamblers.Add(gambler12);
+            context.Users.Add(gambler12);
 
             var gambler13 = new Gambler
             {
                 FirstName = "Boyan",
                 LastName = "Kuzov"
             };
-            context.Gamblers.Add(gambler13);
+            context.Users.Add(gambler13);
 
             var gambler14 = new Gambler
             {
                 FirstName = "Viktor",
                 LastName = "Kalaikov"
             };
-            context.Gamblers.Add(gambler14);
+            context.Users.Add(gambler14);
 
             var gambler15 = new Gambler
             {
                 FirstName = "Rumen",
                 LastName = "Ivanov"
             };
-            context.Gamblers.Add(gambler15);
+            context.Users.Add(gambler15);
 
             var gambler16 = new Gambler
             {
                 FirstName = "Lyubomir",
                 LastName = "Dyankov"
             };
-            context.Gamblers.Add(gambler16);
+            context.Users.Add(gambler16);
 
             var gambler17 = new Gambler
             {
                 FirstName = "Denis",
                 LastName = "Chavdarov"
             };
-            context.Gamblers.Add(gambler17);
+            context.Users.Add(gambler17);
             context.SaveChanges();
         }
     }

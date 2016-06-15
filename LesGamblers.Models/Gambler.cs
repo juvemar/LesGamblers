@@ -17,10 +17,7 @@
         {
             this.predictions = new HashSet<Prediction>();
         }
-
-        [Required]
-        public string Username { get; set; }
-
+        
         [Required]
         public string FirstName { get; set; }
 

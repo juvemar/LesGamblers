@@ -35,7 +35,7 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.HostTeam + ":" + game.GuestTeam + " - " + game.Date.ToString("d dd.MM.yyyy"),
+                    Text = game.HostTeam + ":" + game.GuestTeam + " - " + game.Date.ToString("dd.MM.yyyy hh:mm"),
                     Value = game.Id.ToString()
                 });
             }
