@@ -5,7 +5,7 @@
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using LesGamblers.Models;
-
+    using System.Data.Entity.ModelConfiguration.Conventions;
     public class LesGamblersDbContext : IdentityDbContext<Gambler>, ILesGamblersDbContext
     {
         public LesGamblersDbContext()
@@ -26,6 +26,14 @@
         public static LesGamblersDbContext Create()
         {
             return new LesGamblersDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

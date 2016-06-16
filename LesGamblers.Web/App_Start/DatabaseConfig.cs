@@ -9,8 +9,8 @@
     {
         public static void Initialize()
         {
-            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LesGamblersDbContext, Configuration>());
-            //LesGamblersDbContext.Create().Database.Initialize(true);
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LesGamblersDbContext, Configuration>());
+            LesGamblersDbContext.Create().Database.Initialize(true);
         }
     }
 }

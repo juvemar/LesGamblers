@@ -11,5 +11,7 @@
         IQueryable<Team> GetById(int id);
 
         void Add(Team team);
+
+        void AddPlayer(Team team, Player player);
     }
 }
