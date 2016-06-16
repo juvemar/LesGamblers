@@ -24,6 +24,7 @@
         [Required]
         public int GamblerId { get; set; }
 
+        [UIHint("ChooseGameDropdown")]
         public List<SelectListItem> Games { get; set; }
 
         public void CreateMappings(IConfiguration configuration)

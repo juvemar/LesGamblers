@@ -17,6 +17,10 @@
 
         public virtual IDbSet<Prediction> Predictions { get; set; }
 
+        public virtual IDbSet<Team> Teams { get; set; }
+
+        public virtual IDbSet<Player> Players { get; set; }
+
         public override IDbSet<Gambler> Users { get; set; }
 
         public static LesGamblersDbContext Create()

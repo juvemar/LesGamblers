@@ -1,0 +1,8 @@
+﻿@*@model LesGamblers.Web.Models.Predictions.AddPredictionViewModel
+
+<div class="form-group">
+    @Html.LabelFor(m => m, new { @class = "col-md-2 control-label" })
+    <div class="col-md-10">
+        @Html.DropDownListFor(m => m.GameId, new SelectList(Model.Games, "Value", "Text")), new { @class = "col-md-2 form-control", placeholder = "Choose а Game" })
+    </div>
+</div>*@

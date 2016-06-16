@@ -1,11 +1,13 @@
 ﻿namespace LesGamblers.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
 
     using LesGamblers.Web.Models.Predictions;
     using LesGamblers.Services.Contracts;
+    using LesGamblers.Models;
 
     public class PredictionsController : Controller
     {
@@ -22,30 +24,54 @@
 
         //[Authorize]
         [HttpGet]
-        public ActionResult AddPet(AddPredictionViewModel model)
+        public ActionResult AddPrediction(AddPredictionViewModel model)
         {
-            var availableGames = this.games
-                                .GetAll()
-                                .Where(g => string.IsNullOrEmpty(g.FinalResult))
-                                .OrderBy(g => g.Date)
-                                .ToList();
+            //var availableGames = this.games
+            //                    .GetAll()
+            //                    .Where(g => string.IsNullOrEmpty(g.FinalResult))
+            //                    .OrderBy(g => g.Date)
+            //                    .ToList();
+            var availableGames = new List<Game>();
+            availableGames.Add(new Game()
+            {
+                Date = new DateTime(2016, 6, 16, 16, 00, 00),
+                HostTeam = "Hungary",
+                GuestTeam = "Germany",
+                Id = 123
+            });
+
+            availableGames.Add(new Game()
+            {
+                Date = new DateTime(2016, 6, 16, 19, 00, 00),
+                HostTeam = "Spain",
+                GuestTeam = "Italy",
+                Id = 124
+            });
+
+            availableGames.Add(new Game()
+            {
+                Date = new DateTime(2016, 6, 16, 22, 00, 00),
+                HostTeam = "Poland",
+                GuestTeam = "Netherlands",
+                Id = 125
+            });
 
             model.Games = new List<SelectListItem>();
             foreach (var game in availableGames)
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.HostTeam + ":" + game.GuestTeam + " - " + game.Date.ToString("dd.MM.yyyy hh:mm"),
+                    Text = game.HostTeam + "   " + game.Date.ToString("yyyy.MM.dd hh:mmtt") + "   " + game.GuestTeam,
                     Value = game.Id.ToString()
                 });
             }
 
-            return View();
+            return this.View(model);
         }
 
         //[Authorize]
         [HttpPost]
-        public ActionResult AddGambler(AddPredictionViewModel model)
+        public ActionResult AddPredictionPost(AddPredictionViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
