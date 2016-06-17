@@ -358,131 +358,220 @@ namespace LesGamblers.Data.Migrations
 
         private void SeedUsers(LesGamblers.Data.LesGamblersDbContext context)
         {
-            if (context.Users.Count() != 0)
+            if (context.Users.Count() > 1)
             {
                 return;
             }
+            var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
+            var userManager = new UserManager<Gambler>(new UserStore<Gambler>(context));
+
+            userManager.PasswordValidator = new MinimumLengthValidator(5);
 
             context.Configuration.LazyLoadingEnabled = true;
 
             var gambler1 = new Gambler
             {
                 FirstName = "Martin",
-                LastName = "Videv"
+                LastName = "Videv",
+                UserName = "MartinVidev"
             };
-            context.Users.Add(gambler1);
+            if (userManager.FindByName("MartinVidev") == null)
+            {
+                var result = userManager.Create(gambler1, "MartinVidev123");
+            }
+            //context.Users.Add(gambler1);
 
             var gambler2 = new Gambler
             {
                 FirstName = "Nikolay",
-                LastName = "Lyubenov"
+                LastName = "Lyubenov",
+                UserName = "NikolayLyubenov"
             };
-            context.Users.Add(gambler2);
+            if (userManager.FindByName("NikolayLyubenov") == null)
+            {
+                var result = userManager.Create(gambler2, gambler2.FirstName + gambler2.LastName + "123");
+            }
+            //context.Users.Add(gambler2);
 
             var gambler3 = new Gambler
             {
                 FirstName = "Teodor",
-                LastName = "Todorov"
+                LastName = "Todorov",
+                UserName = "TeodorTodorov"
             };
-            context.Users.Add(gambler3);
-
-            var gambler4 = new Gambler
+            if (userManager.FindByName("TeodorTodorov") == null)
             {
-                FirstName = "Martin",
-                LastName = "Atanasov"
-            };
-            context.Users.Add(gambler4);
+                var result = userManager.Create(gambler3, gambler3.FirstName + gambler3.LastName + "123");
+            }
+            //context.Users.Add(gambler3);
+
+            //var gambler4 = new Gambler
+            //{
+            //    FirstName = "Martin",
+            //    LastName = "Atanasov",
+            //    UserName = "MartinVidev"
+            //};
+            //if (userManager.FindByName("gambler4") == null)
+            //{
+            //    var result = userManager.Create(gambler4, gambler4.FirstName + gambler4.LastName + "123");
+            //}
+            //context.Users.Add(gambler4);
 
             var gambler5 = new Gambler
             {
                 FirstName = "Filip",
-                LastName = "Djalov"
+                LastName = "Djalov",
+                UserName = "FilipDjalov"
             };
-            context.Users.Add(gambler5);
+            if (userManager.FindByName("FilipDjalov") == null)
+            {
+                var result = userManager.Create(gambler5, gambler5.FirstName + gambler5.LastName + "123");
+            }
+            //context.Users.Add(gambler5);
 
             var gambler6 = new Gambler
             {
                 FirstName = "Hristian",
-                LastName = "Haralampiev"
+                LastName = "Haralampiev",
+                UserName = "HristianHaralampiev"
             };
-            context.Users.Add(gambler6);
+            if (userManager.FindByName("HristianHaralampiev") == null)
+            {
+                var result = userManager.Create(gambler6, gambler6.FirstName + gambler6.LastName + "123");
+            }
+            //context.Users.Add(gambler6);
 
             var gambler7 = new Gambler
             {
                 FirstName = "Velislav",
-                LastName = "Petrov"
+                LastName = "Petrov",
+                UserName = "VelislavPetrov"
             };
-            context.Users.Add(gambler7);
+            if (userManager.FindByName("VelislavPetrov") == null)
+            {
+                var result = userManager.Create(gambler7, gambler7.FirstName + gambler7.LastName + "123");
+            }
+            //context.Users.Add(gambler7);
 
             var gambler8 = new Gambler
             {
                 FirstName = "Yordan",
-                LastName = "Peev"
+                LastName = "Peev",
+                UserName = "YordanPeev"
             };
-            context.Users.Add(gambler8);
+            if (userManager.FindByName("YordanPeev") == null)
+            {
+                var result = userManager.Create(gambler8, gambler8.FirstName + gambler8.LastName + "123");
+            }
+            //context.Users.Add(gambler8);
 
             var gambler9 = new Gambler
             {
                 FirstName = "Kaloyan",
-                LastName = "Kirilov"
+                LastName = "Kirilov",
+                UserName = "KaloyanKirilov"
             };
-            context.Users.Add(gambler9);
+            if (userManager.FindByName("KaloyanKirilov") == null)
+            {
+                var result = userManager.Create(gambler9, gambler9.FirstName + gambler9.LastName + "123");
+            }
+            //context.Users.Add(gambler9);
 
             var gambler10 = new Gambler
             {
                 FirstName = "Yulian",
-                LastName = "Velichkov"
+                LastName = "Velichkov",
+                UserName = "YulianVelichkov"
             };
-            context.Users.Add(gambler10);
+            if (userManager.FindByName("YulianVelichkov") == null)
+            {
+                var result = userManager.Create(gambler10, gambler10.FirstName + gambler10.LastName + "123");
+            }
+            //context.Users.Add(gambler10);
 
             var gambler11 = new Gambler
             {
                 FirstName = "Veselin",
-                LastName = "Doichev"
+                LastName = "Doichev",
+                UserName = "VeselinDoichev"
             };
-            context.Users.Add(gambler11);
+            if (userManager.FindByName("VeselinDoichev") == null)
+            {
+                var result = userManager.Create(gambler11, gambler11.FirstName + gambler11.LastName + "123");
+            }
+            //context.Users.Add(gambler11);
 
             var gambler12 = new Gambler
             {
                 FirstName = "Martin",
-                LastName = "Vasev"
+                LastName = "Vasev",
+                UserName = "MartinVasev"
             };
-            context.Users.Add(gambler12);
+            if (userManager.FindByName("MartinVasev") == null)
+            {
+                var result = userManager.Create(gambler12, gambler12.FirstName + gambler12.LastName + "123");
+            }
+            //context.Users.Add(gambler12);
 
             var gambler13 = new Gambler
             {
                 FirstName = "Boyan",
-                LastName = "Kuzov"
+                LastName = "Kuzov",
+                UserName = "BoyanKuzov"
             };
-            context.Users.Add(gambler13);
+            if (userManager.FindByName("BoyanKuzov") == null)
+            {
+                var result = userManager.Create(gambler13, gambler13.FirstName + gambler13.LastName + "123");
+            }
+            //context.Users.Add(gambler13);
 
             var gambler14 = new Gambler
             {
                 FirstName = "Viktor",
-                LastName = "Kalaikov"
+                LastName = "Kalaikov",
+                UserName = "ViktorKalaikov"
             };
-            context.Users.Add(gambler14);
+            if (userManager.FindByName("ViktorKalaikov") == null)
+            {
+                var result = userManager.Create(gambler14, gambler14.FirstName + gambler14.LastName + "123");
+            }
+            //context.Users.Add(gambler14);
 
             var gambler15 = new Gambler
             {
                 FirstName = "Rumen",
-                LastName = "Ivanov"
+                LastName = "Ivanov",
+                UserName = "RumenIvanov"
             };
-            context.Users.Add(gambler15);
+            if (userManager.FindByName("RumenIvanov") == null)
+            {
+                var result = userManager.Create(gambler15, gambler15.FirstName + gambler15.LastName + "123");
+            }
+            //context.Users.Add(gambler15);
 
             var gambler16 = new Gambler
             {
                 FirstName = "Lyubomir",
-                LastName = "Dyankov"
+                LastName = "Dyankov",
+                UserName = "LyubomirDyankov"
             };
-            context.Users.Add(gambler16);
+            if (userManager.FindByName("LyubomirDyankov") == null)
+            {
+                var result = userManager.Create(gambler16, gambler16.FirstName + gambler16.LastName + "123");
+            }
+            //context.Users.Add(gambler16);
 
             var gambler17 = new Gambler
             {
                 FirstName = "Denis",
-                LastName = "Chavdarov"
+                LastName = "Chavdarov",
+                UserName = "DenisChavdarov"
             };
-            context.Users.Add(gambler17);
+            if (userManager.FindByName("DenisChavdarov") == null)
+            {
+                var result = userManager.Create(gambler17, gambler17.FirstName + gambler17.LastName + "123");
+            }
+            //context.Users.Add(gambler17);
             context.SaveChanges();
         }
     }

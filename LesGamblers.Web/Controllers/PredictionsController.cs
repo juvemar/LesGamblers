@@ -26,45 +26,22 @@
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
-            //var availableGames = this.games
-            //                    .GetAll()
-            //                    .Where(g => string.IsNullOrEmpty(g.FinalResult))
-            //                    .OrderBy(g => g.Date)
-            //                    .ToList();
-            var availableGames = new List<Game>();
-            availableGames.Add(new Game()
-            {
-                Date = new DateTime(2016, 6, 16, 16, 00, 00),
-                HostTeam = "Hungary",
-                GuestTeam = "Germany",
-                Id = 123
-            });
-
-            availableGames.Add(new Game()
-            {
-                Date = new DateTime(2016, 6, 16, 19, 00, 00),
-                HostTeam = "Spain",
-                GuestTeam = "Italy",
-                Id = 124
-            });
-
-            availableGames.Add(new Game()
-            {
-                Date = new DateTime(2016, 6, 16, 22, 00, 00),
-                HostTeam = "Poland",
-                GuestTeam = "Netherlands",
-                Id = 125
-            });
+            var availableGames = this.games
+                                .GetAll()
+                                .Where(g => string.IsNullOrEmpty(g.FinalResult))
+                                .OrderBy(g => g.Date)
+                                .ToList();
 
             model.Games = new List<SelectListItem>();
             foreach (var game in availableGames)
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.HostTeam + "   " + game.Date.ToString("yyyy.MM.dd hh:mmtt") + "   " + game.GuestTeam,
-                    Value = game.Id.ToString()
+                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam + " - " + game.GuestTeam,
+                    Value = game.HostTeam + " " + game.GuestTeam
                 });
             }
+            model.Players = new List<SelectListItem>();
 
             return this.View(model);
         }

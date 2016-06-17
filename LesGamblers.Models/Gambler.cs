@@ -29,7 +29,7 @@
 
         public int SignsPredicted { get; set; }
 
-        public int GoalscorerPredicted { get; set; }
+        public int GoalscorersPredicted { get; set; }
 
         public virtual ICollection<Prediction> Predictions
         {

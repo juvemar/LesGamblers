@@ -35,7 +35,7 @@
                     LastName = gambler.LastName,
                     TotalPoints = gambler.TotalPoints,
                     FinalResultsPredicted = gambler.FinalResultsPredicted,
-                    GoalscorerPredicted = gambler.GoalscorerPredicted,
+                    GoalscorersPredicted = gambler.GoalscorersPredicted,
                     SignsPredicted = gambler.SignsPredicted
                 };
 

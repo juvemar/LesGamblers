@@ -9,6 +9,7 @@
     using LesGamblers.Models;
     using LesGamblers.Services;
     using LesGamblers.Services.Contracts;
+
     public static class Program
     {
         private static ILesGamblersDbContext Db = new LesGamblersDbContext();
@@ -78,7 +79,8 @@
             {
                 Number = playerNumber,
                 Name = playerName,
-                ClubTeam = playersClub
+                ClubTeam = playersClub,
+                TeamId = team.Id
             };
             playersServices.Add(addPlayer);
             //TeamsService.AddPlayer(team, addPlayer);

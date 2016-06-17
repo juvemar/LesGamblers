@@ -15,17 +15,19 @@
         [StringLength(5, MinimumLength = 2)]
         public string FinalResult { get; set; }
 
-        [Required]
+        [Display(Name = "Goalscorer")]
         public string Goalscorer { get; set; }
 
         [Required]
+        [Display(Name = "Choose Game")]
         public int GameId { get; set; }
 
         [Required]
         public int GamblerId { get; set; }
 
-        [UIHint("ChooseGameDropdown")]
         public List<SelectListItem> Games { get; set; }
+
+        public List<SelectListItem> Players { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
