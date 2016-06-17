@@ -373,9 +373,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Martin",
                 LastName = "Videv",
-                UserName = "MartinVidev"
+                UserName = "MartinVidev@abv.bg"
             };
-            if (userManager.FindByName("MartinVidev") == null)
+            if (userManager.FindByName("MartinVidev@abv.bg") == null)
             {
                 var result = userManager.Create(gambler1, "MartinVidev123");
             }
@@ -385,9 +385,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Nikolay",
                 LastName = "Lyubenov",
-                UserName = "NikolayLyubenov"
+                UserName = "NikolayLyubenov@abv.bg"
             };
-            if (userManager.FindByName("NikolayLyubenov") == null)
+            if (userManager.FindByName("NikolayLyubenov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler2, gambler2.FirstName + gambler2.LastName + "123");
             }
@@ -397,9 +397,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Teodor",
                 LastName = "Todorov",
-                UserName = "TeodorTodorov"
+                UserName = "TeodorTodorov@abv.bg"
             };
-            if (userManager.FindByName("TeodorTodorov") == null)
+            if (userManager.FindByName("TeodorTodorov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler3, gambler3.FirstName + gambler3.LastName + "123");
             }
@@ -421,9 +421,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Filip",
                 LastName = "Djalov",
-                UserName = "FilipDjalov"
+                UserName = "FilipDjalov@abv.bg"
             };
-            if (userManager.FindByName("FilipDjalov") == null)
+            if (userManager.FindByName("FilipDjalov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler5, gambler5.FirstName + gambler5.LastName + "123");
             }
@@ -433,9 +433,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Hristian",
                 LastName = "Haralampiev",
-                UserName = "HristianHaralampiev"
+                UserName = "HristianHaralampiev@abv.bg"
             };
-            if (userManager.FindByName("HristianHaralampiev") == null)
+            if (userManager.FindByName("HristianHaralampiev@abv.bg") == null)
             {
                 var result = userManager.Create(gambler6, gambler6.FirstName + gambler6.LastName + "123");
             }
@@ -445,9 +445,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Velislav",
                 LastName = "Petrov",
-                UserName = "VelislavPetrov"
+                UserName = "VelislavPetrov@abv.bg"
             };
-            if (userManager.FindByName("VelislavPetrov") == null)
+            if (userManager.FindByName("VelislavPetrov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler7, gambler7.FirstName + gambler7.LastName + "123");
             }
@@ -457,9 +457,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Yordan",
                 LastName = "Peev",
-                UserName = "YordanPeev"
+                UserName = "YordanPeev@abv.bg"
             };
-            if (userManager.FindByName("YordanPeev") == null)
+            if (userManager.FindByName("YordanPeev@abv.bg") == null)
             {
                 var result = userManager.Create(gambler8, gambler8.FirstName + gambler8.LastName + "123");
             }
@@ -469,9 +469,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Kaloyan",
                 LastName = "Kirilov",
-                UserName = "KaloyanKirilov"
+                UserName = "KaloyanKirilov@abv.bg"
             };
-            if (userManager.FindByName("KaloyanKirilov") == null)
+            if (userManager.FindByName("KaloyanKirilov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler9, gambler9.FirstName + gambler9.LastName + "123");
             }
@@ -481,9 +481,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Yulian",
                 LastName = "Velichkov",
-                UserName = "YulianVelichkov"
+                UserName = "YulianVelichkov@abv.bg"
             };
-            if (userManager.FindByName("YulianVelichkov") == null)
+            if (userManager.FindByName("YulianVelichkov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler10, gambler10.FirstName + gambler10.LastName + "123");
             }
@@ -493,9 +493,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Veselin",
                 LastName = "Doichev",
-                UserName = "VeselinDoichev"
+                UserName = "VeselinDoichev@abv.bg"
             };
-            if (userManager.FindByName("VeselinDoichev") == null)
+            if (userManager.FindByName("VeselinDoichev@abv.bg") == null)
             {
                 var result = userManager.Create(gambler11, gambler11.FirstName + gambler11.LastName + "123");
             }
@@ -505,9 +505,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Martin",
                 LastName = "Vasev",
-                UserName = "MartinVasev"
+                UserName = "MartinVasev@abv.bg"
             };
-            if (userManager.FindByName("MartinVasev") == null)
+            if (userManager.FindByName("MartinVasev@abv.bg") == null)
             {
                 var result = userManager.Create(gambler12, gambler12.FirstName + gambler12.LastName + "123");
             }
@@ -517,9 +517,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Boyan",
                 LastName = "Kuzov",
-                UserName = "BoyanKuzov"
+                UserName = "BoyanKuzov@abv.bg"
             };
-            if (userManager.FindByName("BoyanKuzov") == null)
+            if (userManager.FindByName("BoyanKuzov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler13, gambler13.FirstName + gambler13.LastName + "123");
             }
@@ -529,9 +529,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Viktor",
                 LastName = "Kalaikov",
-                UserName = "ViktorKalaikov"
+                UserName = "ViktorKalaikov@abv.bg"
             };
-            if (userManager.FindByName("ViktorKalaikov") == null)
+            if (userManager.FindByName("ViktorKalaikov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler14, gambler14.FirstName + gambler14.LastName + "123");
             }
@@ -541,9 +541,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Rumen",
                 LastName = "Ivanov",
-                UserName = "RumenIvanov"
+                UserName = "RumenIvanov@abv.bg"
             };
-            if (userManager.FindByName("RumenIvanov") == null)
+            if (userManager.FindByName("RumenIvanov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler15, gambler15.FirstName + gambler15.LastName + "123");
             }
@@ -553,9 +553,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Lyubomir",
                 LastName = "Dyankov",
-                UserName = "LyubomirDyankov"
+                UserName = "LyubomirDyankov@abv.bg"
             };
-            if (userManager.FindByName("LyubomirDyankov") == null)
+            if (userManager.FindByName("LyubomirDyankov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler16, gambler16.FirstName + gambler16.LastName + "123");
             }
@@ -565,9 +565,9 @@ namespace LesGamblers.Data.Migrations
             {
                 FirstName = "Denis",
                 LastName = "Chavdarov",
-                UserName = "DenisChavdarov"
+                UserName = "DenisChavdarov@abv.bg"
             };
-            if (userManager.FindByName("DenisChavdarov") == null)
+            if (userManager.FindByName("DenisChavdarov@abv.bg") == null)
             {
                 var result = userManager.Create(gambler17, gambler17.FirstName + gambler17.LastName + "123");
             }

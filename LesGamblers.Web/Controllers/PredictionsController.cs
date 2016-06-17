@@ -22,7 +22,7 @@
             this.games = games;
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
@@ -46,7 +46,7 @@
             return this.View(model);
         }
 
-        //[Authorize]
+        [Authorize]
         [HttpPost]
         public ActionResult AddPredictionPost(AddPredictionViewModel model)
         {
