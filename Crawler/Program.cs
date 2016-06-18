@@ -80,7 +80,8 @@
                 Number = playerNumber,
                 Name = playerName,
                 ClubTeam = playersClub,
-                TeamId = team.Id
+                TeamId = team.Id,
+                Country = team.Name
             };
             playersServices.Add(addPlayer);
             //TeamsService.AddPlayer(team, addPlayer);

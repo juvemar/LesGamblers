@@ -7,19 +7,20 @@
 
     using LesGamblers.Web.Models.Predictions;
     using LesGamblers.Services.Contracts;
-    using LesGamblers.Models;
 
     public class PredictionsController : Controller
     {
         private IGamblersService gamblers;
         private IPredictionsService predictions;
         private IGamesService games;
+        private IPlayersService players;
 
-        public PredictionsController(IGamblersService gamblers, IPredictionsService predictions, IGamesService games)
+        public PredictionsController(IGamblersService gamblers, IPredictionsService predictions, IGamesService games, IPlayersService players)
         {
             this.gamblers = gamblers;
             this.predictions = predictions;
             this.games = games;
+            this.players = players;
         }
 
         [Authorize]
@@ -37,7 +38,7 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam + " - " + game.GuestTeam,
+                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
                     Value = game.HostTeam + " " + game.GuestTeam
                 });
             }
@@ -64,6 +65,30 @@
 
             this.TempData["Notification"] = "Your prediction was added successfully! Good luck!";
             return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize]
+        [ActionName("_PlayersDropdownPartial")]
+        [HttpGet]
+        public JsonResult GetPlayersForGoalscorer(string firstTeam, string secondTeam)
+        {
+            var firstTeamPlayers = this.players.GetAll()
+                .Where(x => x.Country == firstTeam).Select(a => new
+                {
+                    Name = a.Name,
+                    Country = a.Country,
+                    Club = a.ClubTeam
+                })
+                .ToList();
+            var secondTeamPlayers = this.players.GetAll()
+                .Where(x => x.Country == secondTeam).Select(a => new
+                {
+                    Name = a.Name,
+                    Country = a.Country,
+                    Club = a.ClubTeam
+                })
+                .ToList();
+            return Json(new { hostPlayers = firstTeamPlayers, guestPlayers = secondTeamPlayers }, JsonRequestBehavior.AllowGet);
         }
     }
 }

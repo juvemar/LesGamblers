@@ -38,14 +38,13 @@ namespace LesGamblers.Data.Migrations
 
             var admin = new Gambler
             {
-                UserName = "cheatGambler",
-                Email = "admin@gmail.com",
+                UserName = "cheatGambler@abv.bg",
                 PhoneNumber = "0888888888",
                 FirstName = "Martin",
                 LastName = "Atanasov"
             };
 
-            if (userManager.FindByName("cheatGambler") == null)
+            if (userManager.FindByName("cheatGambler@abv.bg") == null)
             {
                 var result = userManager.Create(admin, "admin123");
                 if (result.Succeeded)
