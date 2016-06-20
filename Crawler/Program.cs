@@ -23,11 +23,6 @@
 
         private static void SeedEuroFinals2016()
         {
-            if (TeamsService.GetAll().Count() > 0)
-            {
-                return;
-            }
-
             var configuration = Configuration.Default.WithDefaultLoader();
             var browsingContext = BrowsingContext.New(configuration);
 
@@ -45,6 +40,10 @@
                 var indexOfSquad = currentUrl.IndexOf("/index.html");
                 var documentCurrentTeam = browsingContext.OpenAsync("http://www.uefa.com" + currentUrl.Insert(indexOfSquad, "/squad")).Result;
                 var countryName = documentCurrentTeam.QuerySelector(".team-name").TextContent;
+                if (TeamsService.GetAll().FirstOrDefault(x => x.Name == countryName) != null)
+                {
+                    continue;
+                }
                 var newTeam = new Team
                 {
                     Name = countryName
@@ -67,9 +66,9 @@
             IRepository<Player> repo = new Repository<Player>(Db);
             var playersServices = new PlayersService(repo);
   
-            var formatted = playerData.Replace(" ", string.Empty);
+            var formatted = playerData.Trim();
             var bracketIndex = formatted.IndexOf('(');
-            var playerName = formatted.Substring(0, bracketIndex);
+            var playerName = formatted.Substring(0, bracketIndex).Trim();
             var bracketEndIndex = formatted.IndexOf(')');
             var playerNumber = 0;
             var strNumber = formatted.Substring(bracketIndex + 1, bracketEndIndex - bracketIndex - 1);

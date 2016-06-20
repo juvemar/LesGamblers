@@ -11,5 +11,7 @@
         IQueryable<Prediction> GetById(int id);
 
         void Add(Prediction prediction);
+
+        void UpdatePrediction(Prediction prediction, int id);
     }
 }

@@ -17,7 +17,7 @@
 
         public virtual Game Game { get; set; }
 
-        public int GamblerId { get; set; }
+        public string GamblerId { get; set; }
 
         public virtual Gambler Gambler { get; set; }
 

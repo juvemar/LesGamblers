@@ -30,5 +30,15 @@
         {
             return this.predictions.All().Where(x => x.Id == id).AsQueryable();
         }
+
+        public void UpdatePrediction(Prediction prediction, int id)
+        {
+            var currentPrediction = this.predictions.GetById(id);
+            currentPrediction.FinalResult = prediction.FinalResult == null ? currentPrediction.FinalResult : prediction.FinalResult;
+            currentPrediction.Goalscorer = prediction.Goalscorer == null ? currentPrediction.Goalscorer : prediction.Goalscorer;
+
+            this.predictions.Update(currentPrediction);
+            this.predictions.SaveChanges();
+        }
     }
 }

@@ -12,17 +12,16 @@
     public class AddPredictionViewModel : IMapFrom<Prediction>, IHaveCustomMappings
     {
         [Required]
-        [StringLength(5, MinimumLength = 2)]
+        //[StringLength(5, MinimumLength = 2)]
+        [Display(Name = "Final Result")]
         public string FinalResult { get; set; }
 
         [Display(Name = "Goalscorer")]
         public string Goalscorer { get; set; }
 
-        [Required]
         [Display(Name = "Choose Game")]
-        public int GameId { get; set; }
+        public string GameId { get; set; }
 
-        [Required]
         public int GamblerId { get; set; }
 
         public List<SelectListItem> Games { get; set; }

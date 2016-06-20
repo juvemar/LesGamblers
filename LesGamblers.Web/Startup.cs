@@ -8,6 +8,7 @@ namespace LesGamblers.Web
     {
         public void Configuration(IAppBuilder app)
         {
+            Crawler.Program.Main();
             ConfigureAuth(app);
         }
     }

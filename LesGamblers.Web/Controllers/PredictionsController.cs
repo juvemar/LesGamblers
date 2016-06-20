@@ -27,9 +27,10 @@
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
+            var timeNow = DateTime.Now.AddHours(1);
             var availableGames = this.games
                                 .GetAll()
-                                .Where(g => string.IsNullOrEmpty(g.FinalResult))
+                                .Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)
                                 .OrderBy(g => g.Date)
                                 .ToList();
 
@@ -39,7 +40,7 @@
                 model.Games.Add(new SelectListItem
                 {
                     Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
-                    Value = game.HostTeam + " " + game.GuestTeam
+                    Value = game.Id.ToString()
                 });
             }
             model.Players = new List<SelectListItem>();
@@ -48,6 +49,7 @@
         }
 
         [Authorize]
+        [ActionName("AddPrediction")]
         [HttpPost]
         public ActionResult AddPredictionPost(AddPredictionViewModel model)
         {
@@ -55,25 +57,40 @@
             {
                 return this.View(model);
             }
+            model.FinalResult = model.FinalResult.Trim();
 
             var dataModel = AutoMapper.Mapper.Map<AddPredictionViewModel, LesGamblers.Models.Prediction>(model);
 
             var currentGambler = this.gamblers.GetByUsername(this.User.Identity.Name).FirstOrDefault();
             dataModel.Gambler = currentGambler;
 
-            this.predictions.Add(dataModel);
-
-            this.TempData["Notification"] = "Your prediction was added successfully! Good luck!";
+            var alreadyPredictedMatch = this.predictions.GetAll()
+                .Where(p => p.GamblerId == currentGambler.Id && p.GameId.ToString() == model.GameId)
+                .ToList();
+            if (alreadyPredictedMatch.Count() > 0)
+            {
+                this.predictions.UpdatePrediction(dataModel, alreadyPredictedMatch.FirstOrDefault().Id);
+                this.TempData["Notification"] = "Your prediction was updated successfully! Good luck!";
+            }
+            else
+            {
+                this.predictions.Add(dataModel);
+                this.TempData["Notification"] = "Your prediction was added successfully! Good luck!";
+            }
+            
             return RedirectToAction("Index", "Home");
         }
 
         [Authorize]
         [ActionName("_PlayersDropdownPartial")]
         [HttpGet]
-        public JsonResult GetPlayersForGoalscorer(string firstTeam, string secondTeam)
+        public JsonResult GetPlayersForGoalscorer(string gameId)
         {
+            var game = this.games.GetById(int.Parse(gameId)).FirstOrDefault();
+            var gameHost = game.HostTeam.Replace('_', ' ');
+            var gameGuest = game.GuestTeam.Replace('_', ' ');
             var firstTeamPlayers = this.players.GetAll()
-                .Where(x => x.Country == firstTeam).Select(a => new
+                .Where(x => x.Country == gameHost).Select(a => new
                 {
                     Name = a.Name,
                     Country = a.Country,
@@ -81,7 +98,7 @@
                 })
                 .ToList();
             var secondTeamPlayers = this.players.GetAll()
-                .Where(x => x.Country == secondTeam).Select(a => new
+                .Where(x => x.Country == gameGuest).Select(a => new
                 {
                     Name = a.Name,
                     Country = a.Country,

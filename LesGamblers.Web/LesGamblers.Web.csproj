@@ -258,6 +258,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\layout.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
@@ -313,6 +314,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Crawler\Crawler.csproj">
+      <Project>{5db2ba31-f7fb-453e-97de-f54184651545}</Project>
+      <Name>Crawler</Name>
+    </ProjectReference>
     <ProjectReference Include="..\LesGamblers.Common\LesGamblers.Common.csproj">
       <Project>{ba06356d-a437-4070-84d0-344272c10ad9}</Project>
       <Name>LesGamblers.Common</Name>
