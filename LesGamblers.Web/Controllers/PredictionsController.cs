@@ -30,8 +30,8 @@
             var timeNow = DateTime.Now.AddHours(1);
             var availableGames = this.games
                                 .GetAll()
-                                .Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)
-                                .OrderBy(g => g.Date)
+                                .Where(g => string.IsNullOrEmpty(g.FinalResult))// && g.Date > timeNow
+                                //.OrderBy(g => g.Date)
                                 .ToList();
 
             model.Games = new List<SelectListItem>();
@@ -39,11 +39,11 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
+                    Text = "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),//game.Date.ToString("dd.MM.yy HH:mm") + 
                     Value = game.Id.ToString()
                 });
             }
-            model.Players = new List<SelectListItem>();
+            //model.Players = new List<SelectListItem>();
 
             return this.View(model);
         }

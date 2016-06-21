@@ -23,6 +23,10 @@ textarea {
     max-width: 400px;
 }
 
+.datetimepicker-padd-left{
+    margin-left:2.5%;
+}
+
 /* Styles for validation helpers
 -----------------------------------------------------------*/
 /*.field-validation-error {

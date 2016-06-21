@@ -31,9 +31,9 @@ namespace LesGamblers.Data.Migrations
 
             userManager.PasswordValidator = new MinimumLengthValidator(5);
 
-            if (!roleManager.RoleExists("admin"))
+            if (!roleManager.RoleExists(LesGamblers.Common.GlobalConstants.AdministratorRoleName))
             {
-                roleManager.Create(new IdentityRole("admin"));
+                roleManager.Create(new IdentityRole(LesGamblers.Common.GlobalConstants.AdministratorRoleName));
             }
 
             var admin = new Gambler
@@ -49,7 +49,7 @@ namespace LesGamblers.Data.Migrations
                 var result = userManager.Create(admin, "admin123");
                 if (result.Succeeded)
                 {
-                    userManager.AddToRole(admin.Id, "admin");
+                    userManager.AddToRole(admin.Id, LesGamblers.Common.GlobalConstants.AdministratorRoleName);
                 }
             }
 

@@ -17,14 +17,9 @@ $("#btnChooseGoalscorer").click(function () {
 });
 
 function _loadDropdownPlayers() {
-    debugger;
     var selectedGame = $('#gameDropdown').val();
-    //var firstTeam = selectedGame[0].replace(/_/g, " ");
-    //var secondTeam = selectedGame[1].replace(/_/g, " ");
     var teams = {
         gameId: selectedGame
-        //firstTeam: firstTeam,
-        //secondTeam: secondTeam
     };
 
     $.ajax({
@@ -32,7 +27,6 @@ function _loadDropdownPlayers() {
         url: "/Predictions/_PlayersDropdownPartial",
         data: teams,
         success: function (data) {
-            debugger;
             $('#hostTeam').text(data.hostPlayers[0].Country);
             $('#guestTeam').text(data.guestPlayers[0].Country);
 

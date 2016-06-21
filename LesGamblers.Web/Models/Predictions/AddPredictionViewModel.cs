@@ -26,7 +26,7 @@
 
         public List<SelectListItem> Games { get; set; }
 
-        public List<SelectListItem> Players { get; set; }
+        //public List<SelectListItem> Players { get; set; }
 
         public void CreateMappings(IConfiguration configuration)
         {
