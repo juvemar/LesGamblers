@@ -7,6 +7,7 @@
     using LesGamblers.Services.Contracts;
     using LesGamblers.Web.Models.Games;
     using System;
+    using System.Web.Security;
 
     public class GamesController : Controller
     {
@@ -20,7 +21,7 @@
         }
 
         [HttpGet]
-        //[Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
+        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGame(AddGameViewModel model)
         {
             var allTeams = this.teams.GetAll().ToList();
@@ -40,13 +41,15 @@
 
         [HttpPost]
         [ActionName("AddGame")]
-        //[Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
+        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
                 return this.View(model);
             }
+
+            var isAdmin = this.User.IsInRole(LesGamblers.Common.GlobalConstants.AdministratorRoleName);
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             this.games.Add(dataModel);

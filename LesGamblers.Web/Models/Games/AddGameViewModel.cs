@@ -5,10 +5,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
 
+    using AutoMapper;
+
     using LesGamblers.Models;
     using LesGamblers.Web.Infrastructure;
 
-    public class AddGameViewModel : IMapFrom<Game>
+    public class AddGameViewModel : IMapFrom<Game>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -24,10 +26,11 @@
         [Display(Name = "Guest")]
         public string GuestTeam { get; set; }
 
-        public string FinalResult { get; set; }
-        
         public List<SelectListItem> Teams { get; set; }
 
-        public List<SelectListItem> Predictions { get; set; }
+        public void CreateMappings(IConfiguration configuration)
+        {
+            configuration.CreateMap<AddGameViewModel, Game>("AddGame");
+        }
     }
 }
