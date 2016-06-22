@@ -230,6 +230,7 @@
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Games\AddGameViewModel.cs" />
+    <Compile Include="Models\Games\UpdateFinishedGameViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Gamblers\ListGamblersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -311,6 +312,7 @@
     <Content Include="Views\Predictions\AddPrediction.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ChooseGameDropdown.cshtml" />
     <Content Include="Views\Games\AddGame.cshtml" />
+    <Content Include="Views\Games\UpdateFinishedGame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
