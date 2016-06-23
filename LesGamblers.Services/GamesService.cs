@@ -31,10 +31,11 @@
             return this.games.All().Where(x => x.Id == id).AsQueryable();
         }
 
-        public void UpdateGame(int id)
+        public void UpdateGame(Game game, int id)
         {
             var currentGame = this.games.GetById(id);
-            //currentGambler.HealthRecordId = id;
+            currentGame.FinalResult = game.FinalResult == null ? currentGame.FinalResult : game.FinalResult;
+            currentGame.Goalscorers = game.Goalscorers == null ? currentGame.Goalscorers : game.Goalscorers;
 
             this.games.Update(currentGame);
             this.games.SaveChanges();

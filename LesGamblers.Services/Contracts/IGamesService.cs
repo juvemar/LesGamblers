@@ -12,6 +12,6 @@
 
         void Add(Game game);
 
-        void UpdateGame(int id);
+        void UpdateGame(Game game, int id);
     }
 }

@@ -226,9 +226,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helper\PointsUpdater.cs" />
     <Compile Include="Infrastructure\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Gamblers\UpdateGamblerViewModel.cs" />
     <Compile Include="Models\Games\AddGameViewModel.cs" />
     <Compile Include="Models\Games\UpdateFinishedGameViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -258,8 +260,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\games\updateGame.js" />
-    <Content Include="Scripts\predictions\addPrediction.js" />
+    <Content Include="Scripts\common\dropdowns.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />

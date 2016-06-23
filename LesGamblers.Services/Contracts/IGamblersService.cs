@@ -14,6 +14,6 @@
 
         void Add(Gambler gambler);
 
-        void UpdateGambler(int id);
+        void UpdateGambler(Gambler gambler, int id);
     }
 }

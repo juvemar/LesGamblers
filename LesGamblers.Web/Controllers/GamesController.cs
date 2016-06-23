@@ -8,18 +8,24 @@
     using LesGamblers.Web.Models.Games;
     using System;
     using System.Web.Security;
+    using LesGamblers.Web.Models.Gamblers;
+    using LesGamblers.Web.Helper;
 
     public class GamesController : Controller
     {
         private ITeamsService teams;
         private IGamesService games;
         private IPlayersService players;
+        private IPredictionsService predictions;
+        private IGamblersService gamblers;
 
-        public GamesController(ITeamsService teams, IGamesService games, IPlayersService players)
+        public GamesController(ITeamsService teams, IGamesService games, IPlayersService players, IPredictionsService predictions, IGamblersService gamblers)
         {
             this.teams = teams;
             this.games = games;
             this.players = players;
+            this.predictions = predictions;
+            this.gamblers = gamblers;
         }
 
         [HttpGet]
@@ -89,13 +95,14 @@
                 return this.View(model);
             }
 
-            var isAdmin = this.User.IsInRole(LesGamblers.Common.GlobalConstants.AdministratorRoleName);
-
             var dataModel = AutoMapper.Mapper.Map<UpdateFinishedGameViewModel, LesGamblers.Models.Game>(model);
-            this.games.Add(dataModel);
-            this.TempData["Notification"] = "Your game was added successfully! Good luck!";
+            this.games.UpdateGame(dataModel, model.Id);
+            PointsUpdater.CorrectPredictionsCheck(model, this.predictions, this.gamblers);
+
+            this.TempData["Notification"] = "The game was updated successfully!";
 
             return RedirectToAction("Index", "Home");
         }
+
     }
 }
