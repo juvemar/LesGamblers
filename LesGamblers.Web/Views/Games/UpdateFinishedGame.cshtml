@@ -4,7 +4,7 @@
     ViewBag.Title = "UpdateFinishedGame";
 }
 
-<h2>UpdateFinishedGame</h2>
+<h2 id="viewTitle">Update Game</h2>
 
 @using (Html.BeginForm())
 {
@@ -53,16 +53,8 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Goalscorers, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Goalscorer, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "goalscorer" } })
+                    @Html.TextAreaFor(model => model.Goalscorers, 4, 55, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
                 </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.GoalScorer, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.GoalScorer, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.GoalScorer, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -80,5 +72,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/addPrediction/addPrediction.js"></script>
+    <script src="~/Scripts/predictions/addPrediction.js"></script>
 }

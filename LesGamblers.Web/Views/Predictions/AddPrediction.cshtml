@@ -1,6 +1,6 @@
 ﻿@model LesGamblers.Web.Models.Predictions.AddPredictionViewModel
 
-<h2>Add your predictions</h2>
+<h2 id="viewTitle">Add your predictions</h2>
 
 @using (Html.BeginForm("AddPrediction", "Predictions", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" })) 
 {
@@ -66,5 +66,5 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/addPrediction/addPrediction.js"></script>
+    <script src="~/Scripts/predictions/addPrediction.js"></script>
 }

@@ -4,7 +4,9 @@
         $('#chooseGoalscorer').css("display", "");
         $("#btnChooseGoalscorer").attr("disabled", false);
         $("#btnChooseGoalscorer").attr("data-toggle", "collapse");
-        _loadDropdownPlayers();
+        if ($('#chooseGoalscorer').hasClass("in")) {
+            _loadDropdownPlayers();
+        }
     } else {
         $("#btnChooseGoalscorer").attr("disabled", true);
         $("#btnChooseGoalscorer").attr("data-toggle", "");
@@ -18,10 +20,13 @@ $("#btnChooseGoalscorer").click(function () {
 
 function _loadDropdownPlayers() {
     var selectedGame = $('#gameDropdown').val();
+    if (!selectedGame || selectedGame === "") {
+        return;
+    }
+
     var teams = {
         gameId: selectedGame
     };
-
     $.ajax({
         type: "GET",
         url: "/Predictions/_PlayersDropdownPartial",
@@ -48,10 +53,30 @@ function _loadDropdownPlayers() {
 
 $("#hostPlayersDropdown").change(function () {
     var val = this.value;
-    $('#goalscorer').val(val.toString());
+    var currentView = $('#viewTitle').text();
+    if (currentView == "Add your predictions") {
+        $('#goalscorer').val(val.toString());
+    } else if (currentView == "Update Game") {
+        var currentGoalscorers = $('#Goalscorers').val();
+        if (currentGoalscorers == '') {
+            $('#Goalscorers').val(val);
+            return;
+        }
+        $('#Goalscorers').val(currentGoalscorers + ", " + val);
+    }
 });
 
 $("#guestPlayersDropdown").change(function () {
     var val = this.value;
-    $('#goalscorer').val(val.toString());
+    var currentView = $('#viewTitle').text();
+    if (currentView == "Add your predictions") {
+        $('#goalscorer').val(val.toString());
+    } else if (currentView == "Update Game") {
+        var currentGoalscorers = $('#Goalscorers').val();
+        if (currentGoalscorers == '') {
+            $('#Goalscorers').val(val);
+            return;
+        }
+        $('#Goalscorers').val(currentGoalscorers + ", " + val);
+    }
 });
