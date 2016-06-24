@@ -12,7 +12,7 @@
                 @Html.DisplayNameFor(model => model.AllGames.FirstOrDefault().Date)
             </th>
             <th class="text-center">
-                @Html.DisplayNameFor(model => model.AllGames.FirstOrDefault().Rivals)
+                <label>Game</label>
             </th>
             <th class="text-center">
                 @Html.DisplayNameFor(model => model.AllGames.FirstOrDefault().FinalResult)
@@ -31,7 +31,7 @@
 
         <tr>
             @{
-                @foreach (var game in Model.AllGames)
+                foreach (var game in Model.AllGames)
                 {
                     foreach (var gambler in Model.AllGamblers)
                     {
@@ -39,17 +39,18 @@
                             @Html.DisplayFor(modelItem => game.Date)
                         </td>
                         <td class="text-center">
-                            @Html.DisplayFor(modelItem => game.Rivals)
+                            @{ var teams = game.HostTeam + " " + game.GuestTeam; }
+                            <span>@teams</span>
                         </td>
                         <td class="text-center">
                             @Html.DisplayFor(modelItem => game.FinalResult)
                         </td>
-                        
-                        var pred = game.Predictions.Where(x => x.GameId == game.Id && x.Gambler.Id == gambler.Id).FirstOrDefault();
+
+                                var pred = game.Predictions.Where(x => x.GameId == game.Id && x.Gambler.Id == gambler.Id).FirstOrDefault();
                             <td class="text-center">
-                                @Html.DisplayFor(pred.FinalResult + ", " + pred.GoalScorer)
+                                @{ var result = pred.FinalResult + ", " + pred.Goalscorer; }
+                                <span>@result</span>
                             </td>
-                        
                     }
                 }
             }

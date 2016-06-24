@@ -14,8 +14,9 @@
 
         public DateTime Date { get; set; }
 
-        [Display(Name = "Game")]
-        public string Rivals { get; set; }
+        public string HostTeam { get; set; }
+
+        public string GuestTeam { get; set; }
 
         [Display(Name = "Final Result")]
         public string FinalResult { get; set; }
@@ -26,8 +27,8 @@
 
         public void CreateMappings(AutoMapper.IConfiguration configuration)
         {
-            configuration.CreateMap<ListAllGamesPredictions, Game>("ListAllPredictions")
-                   .ForMember(m => m.HostTeam + " - " + m.GuestTeam, opts => opts.MapFrom(m => m.Rivals));
+            configuration.CreateMap<Game, ListAllGamesPredictions>("ListAllGames")
+                   .ForMember(m => m.Predictions, opts => opts.MapFrom(m => m.Predictions));
         }
     }
 }

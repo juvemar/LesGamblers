@@ -25,9 +25,7 @@
         public int GamblerId { get; set; }
 
         public List<SelectListItem> Games { get; set; }
-
-        //public List<SelectListItem> Players { get; set; }
-
+        
         public void CreateMappings(IConfiguration configuration)
         {
             configuration.CreateMap<AddPredictionViewModel, Prediction>("AddPrediction")

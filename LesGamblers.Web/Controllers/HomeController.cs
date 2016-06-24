@@ -20,7 +20,7 @@
 
         public ActionResult Index()
         {
-            var allDataGames = this.games.GetAll();
+            var allDataGames = this.games.GetAll().ToList();
             var allGames = new List<ListAllGamesPredictions>();
             foreach (var game in allDataGames)
             {
