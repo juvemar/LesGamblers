@@ -36,13 +36,12 @@ function _loadDropdownPlayers() {
             $('#guestTeam').text(data.guestPlayers[0].Country);
 
             $('#hostPlayersDropdown').empty();
-            $('#hostPlayersDropdown').append($("<option />").val('').text(' - Choose Goalscorer - '));
+            $('#hostPlayersDropdown').append($("<option />").val('0').text(' - Choose Goalscorer - '));
             $.each(data.hostPlayers, function () {
-                //this.Name = this.Name.replace(/([a-z])([A-Z])/g, '$1 $2');
                 $('#hostPlayersDropdown').append($("<option />").val(this.Name).text(this.Name + ' (' + this.Club + ')'));
             });
             $('#guestPlayersDropdown').empty();
-            $('#guestPlayersDropdown').append($("<option />").val('').text(' - Choose Goalscorer - '));
+            $('#guestPlayersDropdown').append($("<option />").val('0').text(' - Choose Goalscorer - '));
             $.each(data.guestPlayers, function () {
                 $('#guestPlayersDropdown').append($("<option />").val(this.Name).text(this.Name + ' (' + this.Club + ')'));
             });
@@ -53,30 +52,48 @@ function _loadDropdownPlayers() {
 
 $("#hostPlayersDropdown").change(function () {
     var val = this.value;
+    if (val === '0') {
+        return;
+    }
+
     var currentView = $('#viewTitle').text();
     if (currentView == "Add your predictions") {
         $('#goalscorer').val(val.toString());
     } else if (currentView == "Update Game") {
-        var currentGoalscorers = $('#Goalscorers').val();
-        if (currentGoalscorers == '') {
-            $('#Goalscorers').val(val);
+        var currentGoalscorers = $('#GoalscorersList').val();
+        if (currentGoalscorers === '') {
+            $('#GoalscorersList').val(val);
             return;
         }
-        $('#Goalscorers').val(currentGoalscorers + ", " + val);
+        $('#GoalscorersList').val(currentGoalscorers + ", " + val);
+    }
+});
+
+$("#hostPlayersDropdown").click(function () {
+    $('#hostPlayersDropdown').val("0");
+});
+
+$("#guestPlayersDropdown").change(function () {
+    debugger;
+    var val = this.value;
+    if (val === '0') {
+        return;
+    }
+
+    var currentView = $('#viewTitle').text();
+    if (currentView == "Add your predictions") {
+        $('#goalscorer').val(val.toString());
+    } else if (currentView == "Update Game") {
+        var currentGoalscorers = $('#GoalscorersList').val();
+        if (currentGoalscorers === '') {
+            $('#GoalscorersList').val(val);
+            return;
+        }
+        $('#GoalscorersList').val(currentGoalscorers + ", " + val);
     }
 });
 
 $("#guestPlayersDropdown").change(function () {
-    var val = this.value;
-    var currentView = $('#viewTitle').text();
-    if (currentView == "Add your predictions") {
-        $('#goalscorer').val(val.toString());
-    } else if (currentView == "Update Game") {
-        var currentGoalscorers = $('#Goalscorers').val();
-        if (currentGoalscorers == '') {
-            $('#Goalscorers').val(val);
-            return;
-        }
-        $('#Goalscorers').val(currentGoalscorers + ", " + val);
-    }
+    debugger;
+    $('#guestPlayersDropdown').val("0");
 });

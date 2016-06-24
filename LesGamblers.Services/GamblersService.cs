@@ -36,10 +36,13 @@
             return this.gamblers.All().Where(u => u.UserName == username).AsQueryable();
         }
 
-        public void UpdateGambler(Gambler gambler, int id)
+        public void UpdateGambler(Gambler gambler, string id)
         {
             var currentGambler = this.gamblers.GetById(id);
-            currentGambler.TotalPoints = gambler.TotalPoints == null ? currentGambler.TotalPoints : gambler.TotalPoints;
+            currentGambler.TotalPoints = gambler.TotalPoints == null ? currentGambler.TotalPoints : currentGambler.TotalPoints + gambler.TotalPoints;
+            currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == null ? currentGambler.FinalResultsPredicted : currentGambler.FinalResultsPredicted + gambler.FinalResultsPredicted;
+            currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == null ? currentGambler.GoalscorersPredicted : currentGambler.GoalscorersPredicted + gambler.GoalscorersPredicted;
+            currentGambler.SignsPredicted = gambler.SignsPredicted == null ? currentGambler.SignsPredicted : currentGambler.SignsPredicted + gambler.SignsPredicted;
 
             this.gamblers.Update(currentGambler);
             this.gamblers.SaveChanges();

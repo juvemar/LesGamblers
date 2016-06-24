@@ -10,7 +10,6 @@
         [Required]
         public string FinalResult { get; set; }
 
-        [Required]
         public string Goalscorer { get; set; }
 
         public int GameId { get; set; }

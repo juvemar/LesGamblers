@@ -27,7 +27,7 @@
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
-            var timeNow = DateTime.Now.AddHours(1);
+            var timeNow = DateTime.Now;
             var availableGames = this.games
                                 .GetAll()
                                 .Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)

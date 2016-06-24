@@ -1,7 +1,7 @@
 ﻿$(function () {
     var today = new Date();
     $('#datetimepicker1').datetimepicker({
-        minDate: today.setDate(today.getDate() + 1),
+        minDate: today.setDate(today.getDate()),
         format: "D.MM.YYYY HH:mm"
     });
 

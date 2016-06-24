@@ -1,6 +1,7 @@
 ﻿namespace LesGamblers.Web.Helper
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
 
     using LesGamblers.Services.Contracts;
@@ -9,7 +10,7 @@
 
     public static class PointsUpdater
     {
-        public static void CorrectPredictionsCheck(UpdateFinishedGameViewModel model, IPredictionsService predictions, IGamblersService gamblers)
+        public static void CheckCorrectPredictions(UpdateFinishedGameViewModel model, IPredictionsService predictions, IGamblersService gamblers)
         {
             var realFinalResult = model.FinalResult.Split(new char[] { ' ', ':', '-' }).ToArray();
             var homeTeamGoals = int.Parse(realFinalResult[0]);
@@ -23,34 +24,77 @@
                 var finalResult = prediction.FinalResult.Split(new char[] { ' ', ':', '-' }).ToArray();
                 var homeTeamGoalsPrediction = int.Parse(finalResult[0]);
                 var guestTeamGoalsPrediction = int.Parse(finalResult[1]);
+                var updatedGambler = new UpdateGamblerViewModel();
 
                 if (homeTeamGoals == homeTeamGoalsPrediction && guestTeamGoals == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.ExactFinalResultPredictionPoints;
+                    updatedGambler.FinalResultsPredicted++;
                 }
                 else if (homeTeamGoals == guestTeamGoals && homeTeamGoalsPrediction == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
+                    updatedGambler.SignsPredicted++;
                 }
                 else if (homeTeamGoals > guestTeamGoals && homeTeamGoalsPrediction > guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
+                    updatedGambler.SignsPredicted++;
                 }
                 else if (homeTeamGoals < guestTeamGoals && homeTeamGoalsPrediction < guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
+                    updatedGambler.SignsPredicted++;
                 }
 
-                var goalscorerPredictedCorrectly = model.GoalscorersList.Split(new string[] { ", " }, StringSplitOptions.None).ToArray().Contains(prediction.Goalscorer);
-                if (goalscorerPredictedCorrectly)
+                var goalscorerPredictionPoints = CheckCorrectGoalscorer(model, prediction.Goalscorer);
+                currentPredictionPoints += goalscorerPredictionPoints;
+                if (goalscorerPredictionPoints > 0)
                 {
-                    currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
+                    updatedGambler.GoalscorersPredicted++;
                 }
 
                 var currentGambler = gamblers.GetById(prediction.GamblerId);
-                var updatedGambler = new UpdateGamblerViewModel();
                 updatedGambler.TotalPoints += currentPredictionPoints;
+                var dataModel = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(updatedGambler);
+
+                gamblers.UpdateGambler(dataModel, currentGambler.Id);
             }
+        }
+
+        private static int CheckCorrectGoalscorer(UpdateFinishedGameViewModel model, string predictedGoalscorer)
+        {
+            var actualGoalscorers = model.GoalscorersList.Trim().Split(new string[] { ", " }, StringSplitOptions.None).ToArray();
+            var goalscorerPredictedCorrectly = actualGoalscorers.Contains(predictedGoalscorer);
+            if (goalscorerPredictedCorrectly)
+            {
+                var scorersGoalsCount = new Dictionary<string, int>();
+                var mostGoals = 0;
+                foreach (var scorer in actualGoalscorers)
+                {
+                    if (!scorersGoalsCount.ContainsKey(scorer))
+                    {
+                        scorersGoalsCount.Add(scorer, 1);
+                        if (mostGoals < 1)
+	                    {
+		                     mostGoals = 1;
+	                    }
+                    }
+                    else
+                    {
+                        scorersGoalsCount[scorer]++;
+                        mostGoals = scorersGoalsCount[scorer]; 
+                    }
+                }
+
+                var topScorers = scorersGoalsCount.Where(x => x.Value == mostGoals).Select(x => x.Key).ToList();
+                if (topScorers.Contains(predictedGoalscorer))
+                {
+                    return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;                    
+                }
+            }
+
+            return 0;
         }
     }
 }

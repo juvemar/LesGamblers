@@ -21,7 +21,8 @@
         {
             var allGamblers = this.gamblers
                             .GetAll()
-                            .OrderBy(g => g.TotalPoints)
+                            .OrderByDescending(g => g.TotalPoints)
+                            .ThenByDescending(g => g.FinalResultsPredicted)
                             .ToList();
 
             var gamblersModel = new List<ListGamblersViewModel>();
