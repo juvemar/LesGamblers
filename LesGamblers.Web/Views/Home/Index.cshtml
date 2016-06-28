@@ -1,63 +1,42 @@
 ﻿@using System.Linq;
 @using LesGamblers.Models;
 @model LesGamblers.Web.Models.HomeViewModel
+
 @{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <table class="table">
-        <tr>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.AllGames.FirstOrDefault().Date)
-            </th>
-            <th class="text-center">
-                <label>Game</label>
-            </th>
-            <th class="text-center">
-                @Html.DisplayNameFor(model => model.AllGames.FirstOrDefault().FinalResult)
-            </th>
-            @{
-                var gamblers = new List<string>();
-                foreach (var gambler in Model.AllGamblers)
-                {
-                    gamblers.Add(gambler.Id);
-                    <th class="text-center">
-                        @Html.DisplayName(gambler.FirstName + " " + gambler.LastName)
-                    </th>
-                }
-            }
-        </tr>
+<h2 id="viewTitle">Check out everyone's predictions</h2>
 
-        <tr>
-            @{
-                foreach (var game in Model.AllGames)
-                {
-                    foreach (var gambler in Model.AllGamblers)
-                    {
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => game.Date)
-                        </td>
-                        <td class="text-center">
-                            @{ var teams = game.HostTeam + " " + game.GuestTeam; }
-                            <span>@teams</span>
-                        </td>
-                        <td class="text-center">
-                            @Html.DisplayFor(modelItem => game.FinalResult)
-                        </td>
+<br />
+<div class="form-horizontal">
+    <div class="form-group">
+        @Html.LabelFor(model => model.AllGamblers, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Gambler", Model.AllGamblers, " - Choose Gambler - ", new { @class = "col-md-2 form-control", id = "gamblersDropdown" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.AllGames, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("Game", Model.AllGames, " - Choose Game - ", new { @class = "col-md-2 form-control", id = "gamesDropdown" })
+        </div>
+    </div>
 
-                                var pred = game.Predictions.Where(x => x.GameId == game.Id && x.Gambler.Id == gambler.Id).FirstOrDefault();
-                            <td class="text-center">
-                                @{ var result = pred.FinalResult + ", " + pred.Goalscorer; }
-                                <span>@result</span>
-                            </td>
-                    }
-                }
-            }
-        </tr>
-    </table>
+    <div class="form-group">
+        <div class="col-md-offset-1 col-md-10">
+            <input id="btnCheckPrediction" type="submit" value="Add Prediction" class="btn btn-danger" />
+        </div>
+    </div>
+
+    <div id="predictionDetails">
+        <div class="text-center">
+            <img src="http://bestanimations.com/Sports/Soccer/animated-soccer-balls5.gif" id="LoadingImage" hidden="hidden" />
+        </div>
+    </div>
 </div>
 
-<div class="row">
-
-</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/predictions/checkAllPredictions.js"></script>
+}

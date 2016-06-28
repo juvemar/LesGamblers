@@ -12,7 +12,7 @@
     {
         public static void CheckCorrectPredictions(UpdateFinishedGameViewModel model, IPredictionsService predictions, IGamblersService gamblers)
         {
-            var realFinalResult = model.FinalResult.Split(new char[] { ' ', ':', '-' }).ToArray();
+            var realFinalResult = model.FinalResult.Split(new char[] { ':', '-' }).ToArray();
             var homeTeamGoals = int.Parse(realFinalResult[0]);
             var guestTeamGoals = int.Parse(realFinalResult[1]);
 
@@ -21,7 +21,7 @@
             foreach (var prediction in currentGamePredictions)
             {
                 var currentPredictionPoints = 0;
-                var finalResult = prediction.FinalResult.Split(new char[] { ' ', ':', '-' }).ToArray();
+                var finalResult = prediction.FinalResult.Split(new char[] { ':', '-' }).ToArray();
                 var homeTeamGoalsPrediction = int.Parse(finalResult[0]);
                 var guestTeamGoalsPrediction = int.Parse(finalResult[1]);
                 var updatedGambler = new UpdateGamblerViewModel();
@@ -30,6 +30,7 @@
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.ExactFinalResultPredictionPoints;
                     updatedGambler.FinalResultsPredicted++;
+                    updatedGambler.SignsPredicted++;
                 }
                 else if (homeTeamGoals == guestTeamGoals && homeTeamGoalsPrediction == guestTeamGoalsPrediction)
                 {
@@ -54,7 +55,7 @@
                     updatedGambler.GoalscorersPredicted++;
                 }
 
-                var currentGambler = gamblers.GetById(prediction.GamblerId);
+                var currentGambler = gamblers.GetById(prediction.GamblerId).FirstOrDefault();
                 updatedGambler.TotalPoints += currentPredictionPoints;
                 var dataModel = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(updatedGambler);
 
@@ -64,6 +65,10 @@
 
         private static int CheckCorrectGoalscorer(UpdateFinishedGameViewModel model, string predictedGoalscorer)
         {
+            if (string.IsNullOrEmpty(predictedGoalscorer) && model.GoalscorersList.Trim().Length == 0)
+            {
+                return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
+            }
             var actualGoalscorers = model.GoalscorersList.Trim().Split(new string[] { ", " }, StringSplitOptions.None).ToArray();
             var goalscorerPredictedCorrectly = actualGoalscorers.Contains(predictedGoalscorer);
             if (goalscorerPredictedCorrectly)

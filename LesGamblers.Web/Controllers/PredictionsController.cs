@@ -76,7 +76,7 @@
                 this.predictions.Add(dataModel);
                 this.TempData["Notification"] = "Your prediction was added successfully! Good luck!";
             }
-            
+
             return RedirectToAction("Index", "Home");
         }
 
@@ -105,6 +105,28 @@
                 })
                 .ToList();
             return Json(new { hostPlayers = firstTeamPlayers, guestPlayers = secondTeamPlayers }, JsonRequestBehavior.AllowGet);
+        }
+
+        [ActionName("_CheckPredictionDetails")]
+        [HttpGet]
+        public ActionResult CheckPredictionDetails(string gameId, string gamblerUsername)
+        {
+            var game = this.games.GetById(int.Parse(gameId)).FirstOrDefault();
+            var gambler = this.gamblers.GetByUsername(gamblerUsername).FirstOrDefault();
+
+            var prediction = this.predictions.GetAll()
+                .Where(p => p.GameId == game.Id && p.GamblerId == gambler.Id)
+                .FirstOrDefault();
+
+            var predictionResult = new CheckPredictionDetailsViewModel();
+            if (prediction != null)
+            {
+                predictionResult.FinalResult = prediction.FinalResult;
+                predictionResult.Goalscorer = prediction.Goalscorer;
+                predictionResult.ActualResult = game.FinalResult;
+            }
+
+            return this.PartialView(predictionResult);
         }
     }
 }

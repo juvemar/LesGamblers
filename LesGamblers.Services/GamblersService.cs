@@ -26,9 +26,9 @@
             return this.gamblers.All();
         }
 
-        public Gambler GetById(string id)
+        public IQueryable<Gambler> GetById(string id)
         {
-            return this.gamblers.GetById(id);
+            return this.gamblers.All().Where(x => x.Id == id).AsQueryable(); ;
         }
 
         public IQueryable<Gambler> GetByUsername(string username)

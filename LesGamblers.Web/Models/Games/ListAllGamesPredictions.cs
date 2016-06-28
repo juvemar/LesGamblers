@@ -2,11 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     
     using LesGamblers.Models;
     using LesGamblers.Web.Infrastructure;
-    using System.ComponentModel.DataAnnotations;
     
     public class ListAllGamesPredictions : IMapFrom<Game>, IHaveCustomMappings
     {
