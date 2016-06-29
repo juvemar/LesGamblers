@@ -39,10 +39,10 @@
         public void UpdateGambler(Gambler gambler, string id)
         {
             var currentGambler = this.gamblers.GetById(id);
-            currentGambler.TotalPoints = gambler.TotalPoints == null ? currentGambler.TotalPoints : currentGambler.TotalPoints + gambler.TotalPoints;
-            currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == null ? currentGambler.FinalResultsPredicted : currentGambler.FinalResultsPredicted + gambler.FinalResultsPredicted;
-            currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == null ? currentGambler.GoalscorersPredicted : currentGambler.GoalscorersPredicted + gambler.GoalscorersPredicted;
-            currentGambler.SignsPredicted = gambler.SignsPredicted == null ? currentGambler.SignsPredicted : currentGambler.SignsPredicted + gambler.SignsPredicted;
+            currentGambler.TotalPoints = gambler.TotalPoints == 0 ? currentGambler.TotalPoints : currentGambler.TotalPoints + gambler.TotalPoints;
+            currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == 0 ? currentGambler.FinalResultsPredicted : currentGambler.FinalResultsPredicted + gambler.FinalResultsPredicted;
+            currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == 0 ? currentGambler.GoalscorersPredicted : currentGambler.GoalscorersPredicted + gambler.GoalscorersPredicted;
+            currentGambler.SignsPredicted = gambler.SignsPredicted == 0 ? currentGambler.SignsPredicted : currentGambler.SignsPredicted + gambler.SignsPredicted;
 
             this.gamblers.Update(currentGambler);
             this.gamblers.SaveChanges();
