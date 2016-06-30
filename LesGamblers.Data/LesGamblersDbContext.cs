@@ -9,7 +9,7 @@
     public class LesGamblersDbContext : IdentityDbContext<Gambler>, ILesGamblersDbContext
     {
         public LesGamblersDbContext()
-            :base("LesGamblers")
+            : base("LesGamblers")
         {
         }
 
