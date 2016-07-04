@@ -1,15 +1,15 @@
 ﻿namespace LesGamblers.Web.Controllers
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using System.Web.Security;
 
     using LesGamblers.Services.Contracts;
-    using LesGamblers.Web.Models.Games;
-    using System;
-    using System.Web.Security;
-    using LesGamblers.Web.Models.Gamblers;
     using LesGamblers.Web.Helper;
+    using LesGamblers.Web.Models.Games;
+    using LesGamblers.Web.Models.Gamblers;
 
     public class GamesController : Controller
     {
@@ -104,6 +104,5 @@
 
             return RedirectToAction("Index", "Home");
         }
-
     }
 }
