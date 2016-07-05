@@ -320,6 +320,7 @@
     <Content Include="Views\Games\AddGame.cshtml" />
     <Content Include="Views\Games\UpdateFinishedGame.cshtml" />
     <Content Include="Views\Predictions\_CheckPredictionDetails.cshtml" />
+    <Content Include="Views\Gamblers\UpdateGamblerPoints.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
