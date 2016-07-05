@@ -7,7 +7,6 @@
 
     using LesGamblers.Web.Models.Predictions;
     using LesGamblers.Services.Contracts;
-    using System.Web.Security;
 
     public class PredictionsController : Controller
     {
@@ -29,26 +28,12 @@
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
             var timeNow = DateTime.Now;
-
             var availableGames = this.games
                                 .GetAll()
-                                .ToList();
-
-            var roles = User.IsInRole("admin");
-            if (roles)
-            {
-                availableGames = availableGames
+                                //.Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)
                                 .Where(g => string.IsNullOrEmpty(g.FinalResult))
                                 .OrderBy(g => g.Date)
                                 .ToList();
-            }
-            else
-            {
-                availableGames = availableGames
-                    .Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)
-                    .OrderBy(g => g.Date)
-                    .ToList();
-            }
 
             model.Games = new List<SelectListItem>();
             foreach (var game in availableGames)
