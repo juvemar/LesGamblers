@@ -102,7 +102,7 @@
 
             this.TempData["Notification"] = "The game was updated successfully!";
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("UpdateFinishedGame", "Games");
         }
     }
 }
