@@ -12,7 +12,7 @@
     public class AddPredictionViewModel : IMapFrom<Prediction>, IHaveCustomMappings
     {
         [Required]
-        //[StringLength(5, MinimumLength = 2)]
+        [RegularExpression("^[0-9]+[-: ][0-9]+$", ErrorMessage = "Final Result can contain only digits, ':' or '-'")]
         [Display(Name = "Final Result")]
         public string FinalResult { get; set; }
 

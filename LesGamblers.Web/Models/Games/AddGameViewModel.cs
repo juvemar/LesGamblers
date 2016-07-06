@@ -14,16 +14,16 @@
     {
         public int Id { get; set; }
 
-        [Required]
         [Display(Name = "Date and Time")]
+        [Required]
         public DateTime Date { get; set; }
 
-        [Required]
         [Display(Name = "Host")]
+        [Required]
         public string HostTeam { get; set; }
 
-        [Required]
         [Display(Name = "Guest")]
+        [Required]
         public string GuestTeam { get; set; }
 
         public List<SelectListItem> Teams { get; set; }

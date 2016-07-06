@@ -25,8 +25,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.FinalResult, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.FinalResult, new { htmlAttributes = new { @class = "form-control" } })
-                @*@Html.ValidationMessageFor(model => model.FinalResult, "", new { @class = "text-danger" })*@
+                @Html.EditorFor(model => model.FinalResult, new { htmlAttributes = new { @class = "form-control", placeholder = "(use ' : ', ' - ' or space to separate the numbers)" } })
+                @Html.ValidationMessageFor(model => model.FinalResult, "", new { @class = "text-danger field-validation-valid" })
             </div>
         </div>
 
@@ -61,6 +61,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
+                <input type="button" value="Delete Last" class="btn btn-danger" />
             </div>
         </div>
     </div>

@@ -1,43 +1,90 @@
-﻿@using System.Linq;
-@using LesGamblers.Models;
-@model LesGamblers.Web.Models.HomeViewModel
+﻿@model IEnumerable<LesGamblers.Web.Models.Gamblers.CheckGamblersPredictionsViewModel>
 
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "ListGamblersResults";
 }
 
-<div class="form-horizontal">
-    <h2 id="viewTitle">Check out everyone's predictions</h2>
-
-    <br />
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.AllGamblers, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Gambler", Model.AllGamblers, " - Choose Gambler - ", new { @class = "col-md-2 form-control", id = "gamblersDropdown" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.AllGames, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.DropDownList("Game", Model.AllGames, " - Choose Game - ", new { @class = "col-md-2 form-control", id = "gamesDropdown" })
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="col-md-offset-1 col-md-10">
-            <input id="btnCheckPrediction" type="submit" value="Add Prediction" class="btn btn-danger" />
-        </div>
-    </div>
-
-    <div id="predictionDetails">
-        <div class="text-center">
-            <img src="http://bestanimations.com/Sports/Soccer/animated-soccer-balls5.gif" id="LoadingImage" hidden="hidden" />
-        </div>
-    </div>
+<div class="text-center">
+    <h2>All Gamblers Results</h2>
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/predictions/checkAllPredictions.js"></script>
-}
+<br />
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.FinalResultsPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.SignsPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.GoalscorersPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.TotalPoints)
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        var index = 0;
+        foreach (var item in Model)
+        {
+            if (index % 2 == 0)
+            {
+                <tr class="info">
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FinalResultsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.SignsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.GoalscorersPredicted)
+                    </td>
+                    <td class="text-center">
+                        <strong>@Html.DisplayFor(modelItem => item.TotalPoints)</strong>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FinalResultsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.SignsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.GoalscorersPredicted)
+                    </td>
+                    <td class="text-center">
+                        <strong>@Html.DisplayFor(modelItem => item.TotalPoints)</strong>
+                    </td>
+                </tr>
+            }
+            index++;
+        }
+    }
+
+</table>

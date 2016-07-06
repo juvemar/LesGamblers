@@ -54,6 +54,18 @@
         {
             if (!this.ModelState.IsValid || model.HostTeam == model.GuestTeam)
             {
+                var allTeams = this.teams.GetAll().ToList();
+
+                model.Teams = new List<SelectListItem>();
+                foreach (var team in allTeams)
+                {
+                    model.Teams.Add(new SelectListItem
+                    {
+                        Text = team.Name,
+                        Value = team.Name
+                    });
+                }
+
                 return this.View(model);
             }
 

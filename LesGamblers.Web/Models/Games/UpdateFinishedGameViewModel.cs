@@ -17,6 +17,7 @@
 
         [Display(Name = "Final Result")]
         [Required]
+        [RegularExpression("^[0-9]+[-: ][0-9]+$", ErrorMessage = "Final Result can contain only digits, ':' or '-'")]
         public string FinalResult { get; set; }
 
         [Display(Name = "Goalscorers")]

@@ -24,38 +24,32 @@
 
         public ActionResult Index()
         {
-            var model = new HomeViewModel();
 
-            var allDataGames = this.games.GetAll()
-                .OrderBy(g => g.Date)
-                .ToList();
-            model.AllGames = new List<SelectListItem>();
-            foreach (var game in allDataGames)
+            var allGamblers = this.gamblers
+                            .GetAll()
+                            .OrderByDescending(g => g.TotalPoints)
+                            .ThenByDescending(g => g.FinalResultsPredicted)
+                            .ToList();
+
+            var gamblersModel = new List<CheckGamblersPredictionsViewModel>();
+
+            foreach (var gambler in allGamblers)
             {
-                var newGame = new SelectListItem
+                var newGambler = new CheckGamblersPredictionsViewModel()
                 {
-                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
-                    Value = game.Id.ToString()
+                    UserName = gambler.UserName,
+                    FirstName = gambler.FirstName,
+                    LastName = gambler.LastName,
+                    TotalPoints = gambler.TotalPoints,
+                    FinalResultsPredicted = gambler.FinalResultsPredicted,
+                    GoalscorersPredicted = gambler.GoalscorersPredicted,
+                    SignsPredicted = gambler.SignsPredicted
                 };
-                model.AllGames.Add(newGame);
+
+                gamblersModel.Add(newGambler);
             }
 
-            var allDataGamblers = this.gamblers.GetAll()
-                .OrderBy(g => g.FirstName)
-                .ThenBy(g => g.LastName)
-                .ToList();
-            model.AllGamblers = new List<SelectListItem>();
-            foreach (var gambler in allDataGamblers)
-            {
-                var newGambler = new SelectListItem
-                {
-                    Text = gambler.FirstName + " " + gambler.LastName,
-                    Value = gambler.UserName
-                };
-                model.AllGamblers.Add(newGambler);
-            }
-
-            return View(model);
+            return this.View(gamblersModel);
         }
     }
 }

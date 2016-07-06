@@ -236,7 +236,7 @@
     <Compile Include="Models\Gamblers\UpdateGamblerViewModel.cs" />
     <Compile Include="Models\Games\AddGameViewModel.cs" />
     <Compile Include="Models\Games\UpdateFinishedGameViewModel.cs" />
-    <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\Gamblers\CheckGamblersPredictionsViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Gamblers\ListGamblersViewModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -314,7 +314,7 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Gamblers\ListGamblersResults.cshtml" />
+    <Content Include="Views\Gamblers\CheckGamblersPredictions.cshtml" />
     <Content Include="Views\Predictions\AddPrediction.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ChooseGameDropdown.cshtml" />
     <Content Include="Views\Games\AddGame.cshtml" />

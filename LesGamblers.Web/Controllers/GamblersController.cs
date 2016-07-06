@@ -11,40 +11,49 @@
     public class GamblersController : Controller
     {
         private IGamblersService gamblers;
+        private IGamesService games;
 
-        public GamblersController(IGamblersService gamblers)
+        public GamblersController(IGamblersService gamblers, IGamesService games)
         {
             this.gamblers = gamblers;
+            this.games = games;
         }
 
         [HttpGet]
-        public ActionResult ListGamblersResults()
+        public ActionResult CheckGamblersPredictions()
         {
-            var allGamblers = this.gamblers
-                            .GetAll()
-                            .OrderByDescending(g => g.TotalPoints)
-                            .ThenByDescending(g => g.FinalResultsPredicted)
-                            .ToList();
+            var model = new ListGamblersViewModel();
 
-            var gamblersModel = new List<ListGamblersViewModel>();
-
-            foreach (var gambler in allGamblers)
+            var allDataGames = this.games.GetAll()
+                .OrderBy(g => g.Date)
+                .ToList();
+            model.AllGames = new List<SelectListItem>();
+            foreach (var game in allDataGames)
             {
-                var newGambler = new ListGamblersViewModel()
+                var newGame = new SelectListItem
                 {
-                    UserName = gambler.UserName,
-                    FirstName = gambler.FirstName,
-                    LastName = gambler.LastName,
-                    TotalPoints = gambler.TotalPoints,
-                    FinalResultsPredicted = gambler.FinalResultsPredicted,
-                    GoalscorersPredicted = gambler.GoalscorersPredicted,
-                    SignsPredicted = gambler.SignsPredicted
+                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
+                    Value = game.Id.ToString()
                 };
-
-                gamblersModel.Add(newGambler);
+                model.AllGames.Add(newGame);
             }
 
-            return this.View(gamblersModel);
+            var allDataGamblers = this.gamblers.GetAll()
+                .OrderBy(g => g.FirstName)
+                .ThenBy(g => g.LastName)
+                .ToList();
+            model.AllGamblers = new List<SelectListItem>();
+            foreach (var gambler in allDataGamblers)
+            {
+                var newGambler = new SelectListItem
+                {
+                    Text = gambler.FirstName + " " + gambler.LastName,
+                    Value = gambler.UserName
+                };
+                model.AllGamblers.Add(newGambler);
+            }
+
+            return View(model);
         }
 
         [HttpGet]
