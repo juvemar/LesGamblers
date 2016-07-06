@@ -6,6 +6,7 @@
 
     using LesGamblers.Services.Contracts;
     using LesGamblers.Web.Models.Gamblers;
+    using Microsoft.AspNet.Identity;
 
     public class GamblersController : Controller
     {
@@ -88,7 +89,14 @@
             if (gambler != null)
             {
                 var updatedGambler = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(model);
-                this.gamblers.UpdateGambler(updatedGambler, gambler.Id);
+                this.gamblers.ChangeGamblerPoints(updatedGambler, gambler.Id);
+                if (model.MakeAdmin)
+                {
+                    if (updatedGambler.Roles.Count < 1)
+                    {
+                        this.gamblers.ChangeUserRole(gambler.Id, "admin");
+                    }
+                }
             }
 
             return RedirectToAction("Index", "Home");

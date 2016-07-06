@@ -15,5 +15,9 @@
         void Add(Gambler gambler);
 
         void UpdateGambler(Gambler gambler, string id);
+
+        void ChangeGamblerPoints(Gambler gambler, string id);
+
+        void ChangeUserRole(string gamblerId, string role);
     }
 }

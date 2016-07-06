@@ -27,5 +27,7 @@
         void Detach(T entity);
 
         int SaveChanges();
+
+        void ChangeUserRole(string username, string role);
     }
 }

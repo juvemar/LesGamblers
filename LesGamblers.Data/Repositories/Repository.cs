@@ -6,6 +6,8 @@
 
     using LesGamblers.Data;
     using Models;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     public class Repository<T> : IRepository<T>
        where T : class, IDeletableEntity
@@ -122,6 +124,12 @@
         public void Dispose()
         {
             this.Context.Dispose();
+        }
+
+        public void ChangeUserRole(string userId, string role)
+        {
+            var UserManager = new UserManager<Gambler>(new UserStore<Gambler>((LesGamblersDbContext)this.Context));
+            UserManager.AddToRole(userId, role);
         }
     }
 }

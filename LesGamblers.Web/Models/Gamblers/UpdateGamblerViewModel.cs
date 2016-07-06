@@ -25,6 +25,9 @@
         [Display(Name = "Goalscorers Predicted")]
         public int GoalscorersPredicted { get; set; }
 
+        [Display(Name = "Make Admin")]
+        public bool MakeAdmin { get; set; }
+
         public List<SelectListItem> AllGamblers { get; set; }
 
         public void CreateMappings(AutoMapper.IConfiguration configuration)
