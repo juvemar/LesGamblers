@@ -69,7 +69,7 @@
             {
                 return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
             }
-            var actualGoalscorers = model.GoalscorersList.Trim().Split(new string[] { ", " }, StringSplitOptions.None).ToArray();
+            var actualGoalscorers = model.GoalscorersList.Trim().Split(new string[] { "," }, StringSplitOptions.None).ToArray();
             var goalscorerPredictedCorrectly = actualGoalscorers.Contains(predictedGoalscorer);
             if (goalscorerPredictedCorrectly)
             {

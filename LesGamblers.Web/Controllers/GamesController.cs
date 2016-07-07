@@ -105,6 +105,21 @@
         {
             if (!this.ModelState.IsValid)
             {
+                var allTeams = this.games.GetAll()
+                            .Where(g => g.Date < DateTime.Now)
+                            .ToList()
+                            .OrderBy(g => g.Date);
+
+                model.Games = new List<SelectListItem>();
+                foreach (var game in allTeams)
+                {
+                    model.Games.Add(new SelectListItem
+                    {
+                        Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
+                        Value = game.Id.ToString()
+                    });
+                }
+
                 return this.View(model);
             }
 
