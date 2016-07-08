@@ -23,8 +23,7 @@ function _loadPredictionDetails() {
             $("#predictionDetails").html(view);
         },
         error: function (errorData) {
-            debugger;
-            onError(errorData);
+            console.log(errorData);
         }
     });
 };
