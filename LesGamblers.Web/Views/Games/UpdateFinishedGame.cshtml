@@ -4,15 +4,16 @@
     ViewBag.Title = "UpdateFinishedGame";
 }
 
-<h2 id="viewTitle">Update Game</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>UpdateFinishedGameViewModel</h4>
         <hr />
+        <div class="text-center">
+            <h2 id="viewTitle">Update Game</h2>
+        </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
@@ -74,5 +75,5 @@
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Scripts/common/dropdowns.js"></script>
-
+    <script src="~/Scripts/games/updateGame.js"></script>
 }

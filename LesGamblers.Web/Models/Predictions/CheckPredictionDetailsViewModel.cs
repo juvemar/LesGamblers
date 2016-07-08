@@ -10,5 +10,7 @@
         public string Goalscorer { get; set; }
 
         public string ActualResult { get; set; }
+
+        public string ActualGoalscorers { get; set; }
     }
 }

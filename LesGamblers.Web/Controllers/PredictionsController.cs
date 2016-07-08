@@ -125,6 +125,11 @@
                 predictionResult.FinalResult = prediction.FinalResult;
                 predictionResult.Goalscorer = prediction.Goalscorer;
                 predictionResult.ActualResult = game.FinalResult;
+                if (game.Goalscorers.Count > 0)
+                {
+                    var allGoalscorers = string.Join(", ", game.Goalscorers.ToArray());
+                    predictionResult.ActualGoalscorers = allGoalscorers;
+                }
             }
 
             return this.PartialView(predictionResult);
