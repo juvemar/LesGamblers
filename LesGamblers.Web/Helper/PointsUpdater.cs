@@ -65,11 +65,17 @@
 
         private static int CheckCorrectGoalscorer(UpdateFinishedGameViewModel model, string predictedGoalscorer)
         {
-            if (string.IsNullOrEmpty(predictedGoalscorer) && model.GoalscorersList.Trim().Length == 0)
+            if (string.IsNullOrEmpty(predictedGoalscorer) && model.Goalscorers.Trim().Length == 0)
             {
                 return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
             }
-            var actualGoalscorers = model.GoalscorersList.Trim().Split(new string[] { "," }, StringSplitOptions.None).ToArray();
+
+            var actualGoalscorers = new string[predictedGoalscorer.Where(x => x == ',').Count() + 1];
+            if (model.Goalscorers != null)
+            {
+                actualGoalscorers = model.Goalscorers.Trim().Split(new string[] { "," }, StringSplitOptions.None).ToArray();
+            }
+
             var goalscorerPredictedCorrectly = actualGoalscorers.Contains(predictedGoalscorer);
             if (goalscorerPredictedCorrectly)
             {

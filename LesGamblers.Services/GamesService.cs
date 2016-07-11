@@ -5,6 +5,7 @@
     using Data;
     using LesGamblers.Services.Contracts;
     using Models;
+    using System.Collections.Generic;
 
     public class GamesService : IGamesService
     {

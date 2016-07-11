@@ -10,6 +10,7 @@
     using LesGamblers.Web.Helper;
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
+    using LesGamblers.Models;
 
     public class GamesController : Controller
     {
@@ -124,6 +125,7 @@
             }
 
             var dataModel = AutoMapper.Mapper.Map<UpdateFinishedGameViewModel, LesGamblers.Models.Game>(model);
+
             this.games.UpdateGame(dataModel, model.Id);
             PointsUpdater.CheckCorrectPredictions(model, this.predictions, this.gamblers);
 

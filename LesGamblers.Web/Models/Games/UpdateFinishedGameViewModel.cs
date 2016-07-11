@@ -21,9 +21,7 @@
         public string FinalResult { get; set; }
 
         [Display(Name = "Goalscorers")]
-        public string GoalscorersList { get; set; }
-
-        public List<string> Goalscorers { get; set; }
+        public string Goalscorers { get; set; }
 
         public List<SelectListItem> Games { get; set; }
 

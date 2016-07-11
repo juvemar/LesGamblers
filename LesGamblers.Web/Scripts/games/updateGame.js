@@ -31,7 +31,7 @@ function deleteScorer(el) {
     var goalscorerName = that.prev().prev().text().trim();
     that.parent().remove();
 
-    var goalscorers = $("#GoalscorersList").val().split(',');
+    var goalscorers = $("#Goalscorers").val().split(',');
     var updatedGoalscorers = [];
     var removed = false;
     goalscorers.forEach(function (element, index, array) {
@@ -42,7 +42,7 @@ function deleteScorer(el) {
         }
     });
 
-    $("#GoalscorersList").val(updatedGoalscorers.join());
+    $("#Goalscorers").val(updatedGoalscorers.join());
 }
 
 function _buildGoalscorerDiv(val) {
@@ -74,10 +74,10 @@ function _buildGoalscorerDiv(val) {
 }
 
 function _fillHiddenGoalcorers(val) {
-    var currentGoalscorers = $('#GoalscorersList').val();
+    var currentGoalscorers = $('#Goalscorers').val();
     if (currentGoalscorers === '') {
-        $('#GoalscorersList').val(val);
+        $('#Goalscorers').val(val);
         return;
     }
-    $('#GoalscorersList').val(currentGoalscorers + "," + val);
+    $('#Goalscorers').val(currentGoalscorers + "," + val);
 }

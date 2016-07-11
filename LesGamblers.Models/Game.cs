@@ -7,12 +7,10 @@
     public class Game : IDeletableEntity
     {
         private ICollection<Prediction> predictions;
-        private ICollection<string> goalscorers;
 
         public Game()
         {
             this.predictions = new HashSet<Prediction>();
-            this.goalscorers = new HashSet<string>();
         }
 
         public int Id { get; set; }
@@ -27,11 +25,7 @@
 
         public string FinalResult { get; set; }
 
-        public ICollection<string> Goalscorers
-        {
-            get { return this.goalscorers; }
-            set { this.goalscorers = value; }
-        }
+        public string Goalscorers { get; set; }
 
         public ICollection<Prediction> Predictions
         {
