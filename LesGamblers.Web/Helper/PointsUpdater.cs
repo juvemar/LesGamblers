@@ -18,40 +18,33 @@
             var guestTeamGoals = int.Parse(realFinalResult[1]);
 
             var currentGamePredictions = predictions.GetAll().Where(p => p.GameId == model.Id).ToList();
-
             foreach (var prediction in currentGamePredictions)
             {
                 var currentPredictionPoints = 0;
                 var finalResult = prediction.FinalResult.Split(new char[] { ':', '-' }).ToArray();
                 var homeTeamGoalsPrediction = int.Parse(finalResult[0]);
                 var guestTeamGoalsPrediction = int.Parse(finalResult[1]);
-                //var updatedGambler = new UpdateGamblerViewModel();
                 var updatedPrediction = new UpdatePredictionPointsViewModel();
 
                 if (homeTeamGoals == homeTeamGoalsPrediction && guestTeamGoals == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.ExactFinalResultPredictionPoints;
-                    //updatedGambler.FinalResultsPredicted++;
                     updatedPrediction.FinalResultPredicted = true;
-                    //updatedGambler.SignsPredicted++;
                     updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals == guestTeamGoals && homeTeamGoalsPrediction == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    //updatedGambler.SignsPredicted++;
                     updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals > guestTeamGoals && homeTeamGoalsPrediction > guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    //updatedGambler.SignsPredicted++;
                     updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals < guestTeamGoals && homeTeamGoalsPrediction < guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    //updatedGambler.SignsPredicted++;
                     updatedPrediction.SignPredicted = true;
                 }
 
@@ -59,18 +52,13 @@
                 currentPredictionPoints += goalscorerPredictionPoints;
                 if (goalscorerPredictionPoints > 0)
                 {
-                    //updatedGambler.GoalscorersPredicted++;
                     updatedPrediction.GoalscorerPredicted = true;
                 }
 
-                //var currentGambler = gamblers.GetById(prediction.GamblerId).FirstOrDefault();
                 var currentPrediction = predictions.GetById(prediction.Id).FirstOrDefault();
-                //updatedGambler.TotalPoints += currentPredictionPoints;
                 updatedPrediction.TotalPoints = currentPredictionPoints;
-                //var dataModel = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(updatedGambler);
                 var dataModel = AutoMapper.Mapper.Map<UpdatePredictionPointsViewModel, LesGamblers.Models.Prediction>(updatedPrediction);
 
-                //gamblers.UpdateGambler(dataModel, currentGambler.Id);
                 predictions.UpdatePrediction(dataModel, prediction.Id);
             }
         }

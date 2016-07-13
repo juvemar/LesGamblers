@@ -124,6 +124,7 @@
             {
                 predictionResult.FinalResult = prediction.FinalResult;
                 predictionResult.Goalscorer = prediction.Goalscorer;
+                predictionResult.TotalPoints = prediction.TotalPoints;
                 predictionResult.ActualResult = game.FinalResult;
                 if (game.Goalscorers.Length > 0)
                 {
