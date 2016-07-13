@@ -10,6 +10,14 @@
         [Required]
         public string FinalResult { get; set; }
 
+        public int TotalPoints { get; set; }
+
+        public bool FinalResultPredicted { get; set; }
+
+        public bool SignPredicted { get; set; }
+
+        public bool GoalscorerPredicted { get; set; }
+
         public string Goalscorer { get; set; }
 
         public int GameId { get; set; }

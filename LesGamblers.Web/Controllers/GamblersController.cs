@@ -57,7 +57,7 @@
         }
 
         [HttpGet]
-        public ActionResult UpdateGamblerPoints()
+        public ActionResult UpdateGambler()
         {
             var model = new UpdateGamblerViewModel();
             model.AllGamblers = new List<SelectListItem>();
@@ -76,7 +76,7 @@
         }
 
         [HttpPost]
-        public ActionResult UpdateGamblerPoints(UpdateGamblerViewModel model)
+        public ActionResult UpdateGambler(UpdateGamblerViewModel model)
         {
             if (!this.ModelState.IsValid)
             {
@@ -98,7 +98,7 @@
             if (gambler != null)
             {
                 var updatedGambler = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(model);
-                this.gamblers.ChangeGamblerPoints(updatedGambler, gambler.Id);
+                //this.gamblers.ChangeGamblerPoints(updatedGambler, gambler.Id); // Change exact gambler points manually
                 if (model.MakeAdmin)
                 {
                     if (updatedGambler.Roles.Count < 1)

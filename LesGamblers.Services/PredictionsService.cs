@@ -36,6 +36,10 @@
             var currentPrediction = this.predictions.GetById(id);
             currentPrediction.FinalResult = prediction.FinalResult == null ? currentPrediction.FinalResult : prediction.FinalResult;
             currentPrediction.Goalscorer = prediction.Goalscorer == null ? currentPrediction.Goalscorer : prediction.Goalscorer;
+            currentPrediction.TotalPoints = prediction.TotalPoints;
+            currentPrediction.GoalscorerPredicted = prediction.GoalscorerPredicted;
+            currentPrediction.SignPredicted = prediction.SignPredicted;
+            currentPrediction.FinalResultPredicted = prediction.FinalResultPredicted;
 
             this.predictions.Update(currentPrediction);
             this.predictions.SaveChanges();

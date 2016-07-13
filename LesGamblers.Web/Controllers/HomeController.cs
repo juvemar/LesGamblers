@@ -15,41 +15,47 @@
     {
         private IGamesService games;
         private IGamblersService gamblers;
+        private IPredictionsService predictions;
 
-        public HomeController(IGamesService games, IGamblersService gamblers)
+        public HomeController(IGamesService games, IGamblersService gamblers, IPredictionsService predictions)
         {
             this.games = games;
             this.gamblers = gamblers;
+            this.predictions = predictions;
         }
 
+        [HttpGet]
         public ActionResult Index()
         {
-
-            var allGamblers = this.gamblers
-                            .GetAll()
-                            .OrderByDescending(g => g.TotalPoints)
-                            .ThenByDescending(g => g.FinalResultsPredicted)
-                            .ToList();
-
+            var allGamblers = this.gamblers.GetAll().ToList();
             var gamblersModel = new List<CheckGamblersPredictionsViewModel>();
 
             foreach (var gambler in allGamblers)
             {
+                var gamblerPredictions = this.predictions.GetAll().Where(p => p.GamblerId == gambler.Id).ToList();
+                var totalPoints = gamblerPredictions.Sum(p => p.TotalPoints);
+                var exactResults = gamblerPredictions.Where(p => p.FinalResultPredicted == true).Count();
+                var goalscorers = gamblerPredictions.Where(p => p.GoalscorerPredicted == true).Count();
+                var signs = gamblerPredictions.Where(p => p.SignPredicted == true).Count();
+
                 var newGambler = new CheckGamblersPredictionsViewModel()
                 {
                     UserName = gambler.UserName,
                     FirstName = gambler.FirstName,
                     LastName = gambler.LastName,
-                    TotalPoints = gambler.TotalPoints,
-                    FinalResultsPredicted = gambler.FinalResultsPredicted,
-                    GoalscorersPredicted = gambler.GoalscorersPredicted,
-                    SignsPredicted = gambler.SignsPredicted
+                    TotalPoints = totalPoints,
+                    FinalResultsPredicted = exactResults,
+                    GoalscorersPredicted = goalscorers,
+                    SignsPredicted = signs
                 };
 
                 gamblersModel.Add(newGambler);
             }
 
-            return this.View(gamblersModel);
+            return this.View(gamblersModel
+                            .OrderByDescending(g => g.TotalPoints)
+                            .ThenByDescending(g => g.FinalResultsPredicted)
+                            .ToList());
         }
     }
 }

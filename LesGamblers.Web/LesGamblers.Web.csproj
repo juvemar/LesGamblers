@@ -242,6 +242,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Predictions\AddPredictionViewModel.cs" />
     <Compile Include="Models\Predictions\CheckPredictionDetailsViewModel.cs" />
+    <Compile Include="Models\Predictions\UpdatePredictionPointsViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -318,17 +319,15 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Gamblers\CheckGamblersPredictions.cshtml" />
     <Content Include="Views\Predictions\AddPrediction.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\ChooseGameDropdown.cshtml" />
     <Content Include="Views\Games\AddGame.cshtml" />
     <Content Include="Views\Games\UpdateFinishedGame.cshtml" />
     <Content Include="Views\Predictions\_CheckPredictionDetails.cshtml" />
-    <Content Include="Views\Gamblers\UpdateGamblerPoints.cshtml" />
+    <Content Include="Views\Gamblers\UpdateGambler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>

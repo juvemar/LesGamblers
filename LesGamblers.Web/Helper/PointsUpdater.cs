@@ -7,6 +7,7 @@
     using LesGamblers.Services.Contracts;
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
+    using LesGamblers.Web.Models.Predictions;
 
     public static class PointsUpdater
     {
@@ -24,42 +25,53 @@
                 var finalResult = prediction.FinalResult.Split(new char[] { ':', '-' }).ToArray();
                 var homeTeamGoalsPrediction = int.Parse(finalResult[0]);
                 var guestTeamGoalsPrediction = int.Parse(finalResult[1]);
-                var updatedGambler = new UpdateGamblerViewModel();
+                //var updatedGambler = new UpdateGamblerViewModel();
+                var updatedPrediction = new UpdatePredictionPointsViewModel();
 
                 if (homeTeamGoals == homeTeamGoalsPrediction && guestTeamGoals == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.ExactFinalResultPredictionPoints;
-                    updatedGambler.FinalResultsPredicted++;
-                    updatedGambler.SignsPredicted++;
+                    //updatedGambler.FinalResultsPredicted++;
+                    updatedPrediction.FinalResultPredicted = true;
+                    //updatedGambler.SignsPredicted++;
+                    updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals == guestTeamGoals && homeTeamGoalsPrediction == guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    updatedGambler.SignsPredicted++;
+                    //updatedGambler.SignsPredicted++;
+                    updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals > guestTeamGoals && homeTeamGoalsPrediction > guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    updatedGambler.SignsPredicted++;
+                    //updatedGambler.SignsPredicted++;
+                    updatedPrediction.SignPredicted = true;
                 }
                 else if (homeTeamGoals < guestTeamGoals && homeTeamGoalsPrediction < guestTeamGoalsPrediction)
                 {
                     currentPredictionPoints += LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
-                    updatedGambler.SignsPredicted++;
+                    //updatedGambler.SignsPredicted++;
+                    updatedPrediction.SignPredicted = true;
                 }
 
                 var goalscorerPredictionPoints = CheckCorrectGoalscorer(model, prediction.Goalscorer);
                 currentPredictionPoints += goalscorerPredictionPoints;
                 if (goalscorerPredictionPoints > 0)
                 {
-                    updatedGambler.GoalscorersPredicted++;
+                    //updatedGambler.GoalscorersPredicted++;
+                    updatedPrediction.GoalscorerPredicted = true;
                 }
 
-                var currentGambler = gamblers.GetById(prediction.GamblerId).FirstOrDefault();
-                updatedGambler.TotalPoints += currentPredictionPoints;
-                var dataModel = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(updatedGambler);
+                //var currentGambler = gamblers.GetById(prediction.GamblerId).FirstOrDefault();
+                var currentPrediction = predictions.GetById(prediction.Id).FirstOrDefault();
+                //updatedGambler.TotalPoints += currentPredictionPoints;
+                updatedPrediction.TotalPoints = currentPredictionPoints;
+                //var dataModel = AutoMapper.Mapper.Map<UpdateGamblerViewModel, LesGamblers.Models.Gambler>(updatedGambler);
+                var dataModel = AutoMapper.Mapper.Map<UpdatePredictionPointsViewModel, LesGamblers.Models.Prediction>(updatedPrediction);
 
-                gamblers.UpdateGambler(dataModel, currentGambler.Id);
+                //gamblers.UpdateGambler(dataModel, currentGambler.Id);
+                predictions.UpdatePrediction(dataModel, prediction.Id);
             }
         }
 

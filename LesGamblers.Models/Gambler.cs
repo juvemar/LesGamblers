@@ -23,13 +23,13 @@
 
         public string LastName { get; set; }
 
-        public int TotalPoints { get; set; }
+        //public int TotalPoints { get; set; }
 
-        public int FinalResultsPredicted { get; set; }
+        //public int FinalResultsPredicted { get; set; }
 
-        public int SignsPredicted { get; set; }
+        //public int SignsPredicted { get; set; }
 
-        public int GoalscorersPredicted { get; set; }
+        //public int GoalscorersPredicted { get; set; }
 
         public virtual ICollection<Prediction> Predictions
         {

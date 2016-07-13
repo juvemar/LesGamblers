@@ -2,10 +2,11 @@
 {
     using System.Linq;
 
+    using Microsoft.AspNet.Identity;
+
     using Contracts;
     using Data;
     using Models;
-    using Microsoft.AspNet.Identity;
 
     public class GamblersService : IGamblersService
     {
@@ -37,29 +38,29 @@
             return this.gamblers.All().Where(u => u.UserName == username).AsQueryable();
         }
 
-        public void UpdateGambler(Gambler gambler, string id)
-        {
-            var currentGambler = this.gamblers.GetById(id);
-            currentGambler.TotalPoints = gambler.TotalPoints == 0 ? currentGambler.TotalPoints : currentGambler.TotalPoints + gambler.TotalPoints;
-            currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == 0 ? currentGambler.FinalResultsPredicted : currentGambler.FinalResultsPredicted + gambler.FinalResultsPredicted;
-            currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == 0 ? currentGambler.GoalscorersPredicted : currentGambler.GoalscorersPredicted + gambler.GoalscorersPredicted;
-            currentGambler.SignsPredicted = gambler.SignsPredicted == 0 ? currentGambler.SignsPredicted : currentGambler.SignsPredicted + gambler.SignsPredicted;
+        //public void UpdateGambler(Gambler gambler, string id) // Use if gambler's points are saved in the Gambler model, not in its predictions(Prediction model)
+        //{
+        //    var currentGambler = this.gamblers.GetById(id);
+        //    currentGambler.TotalPoints = gambler.TotalPoints == 0 ? currentGambler.TotalPoints : currentGambler.TotalPoints + gambler.TotalPoints;
+        //    currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == 0 ? currentGambler.FinalResultsPredicted : currentGambler.FinalResultsPredicted + gambler.FinalResultsPredicted;
+        //    currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == 0 ? currentGambler.GoalscorersPredicted : currentGambler.GoalscorersPredicted + gambler.GoalscorersPredicted;
+        //    currentGambler.SignsPredicted = gambler.SignsPredicted == 0 ? currentGambler.SignsPredicted : currentGambler.SignsPredicted + gambler.SignsPredicted;
 
-            this.gamblers.Update(currentGambler);
-            this.gamblers.SaveChanges();
-        }
+        //    this.gamblers.Update(currentGambler);
+        //    this.gamblers.SaveChanges();
+        //}
 
-        public void ChangeGamblerPoints(Gambler gambler, string id)
-        {
-            var currentGambler = this.gamblers.GetById(id);
-            currentGambler.TotalPoints = gambler.TotalPoints == 0 ? currentGambler.TotalPoints : gambler.TotalPoints;
-            currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == 0 ? currentGambler.FinalResultsPredicted : gambler.FinalResultsPredicted;
-            currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == 0 ? currentGambler.GoalscorersPredicted : gambler.GoalscorersPredicted;
-            currentGambler.SignsPredicted = gambler.SignsPredicted == 0 ? currentGambler.SignsPredicted : gambler.SignsPredicted;
+        //public void ChangeGamblerPoints(Gambler gambler, string id) // Use to change exact gambler points manually
+        //{
+        //    var currentGambler = this.gamblers.GetById(id);
+        //    currentGambler.TotalPoints = gambler.TotalPoints == 0 ? currentGambler.TotalPoints : gambler.TotalPoints;
+        //    currentGambler.FinalResultsPredicted = gambler.FinalResultsPredicted == 0 ? currentGambler.FinalResultsPredicted : gambler.FinalResultsPredicted;
+        //    currentGambler.GoalscorersPredicted = gambler.GoalscorersPredicted == 0 ? currentGambler.GoalscorersPredicted : gambler.GoalscorersPredicted;
+        //    currentGambler.SignsPredicted = gambler.SignsPredicted == 0 ? currentGambler.SignsPredicted : gambler.SignsPredicted;
 
-            this.gamblers.Update(currentGambler);
-            this.gamblers.SaveChanges();
-        }
+        //    this.gamblers.Update(currentGambler);
+        //    this.gamblers.SaveChanges();
+        //}
 
         public void ChangeUserRole(string gamblerId, string role)
         {
