@@ -9,8 +9,9 @@
     using LesGamblers.Models;
     using LesGamblers.Services;
     using LesGamblers.Services.Contracts;
+    using System.Collections.Generic;
 
-    public static class Program
+    public static class StartUp
     {
         private static ILesGamblersDbContext Db = new LesGamblersDbContext();
         private static IRepository<Team> Repo = new Repository<Team>(Db);
@@ -19,6 +20,46 @@
         public static void Main() 
         {
             SeedEuroFinals2016();
+            //SeedChampionsLeage20162017();
+        }
+
+        private static void SeedChampionsLeage20162017()
+        {
+            var configuration = Configuration.Default.WithDefaultLoader();
+            var browsingContext = BrowsingContext.New(configuration);
+            var url = "http://www.uefa.com/uefachampionsleague/season=2017/clubs/index.html";
+            var documentAllTeams = browsingContext.OpenAsync(url).Result;
+
+            var allTeamsElements = new List<string>();
+            var allTeamsDiv = documentAllTeams.QuerySelectorAll(".clubList").FirstOrDefault();
+            foreach (var teamListItem in allTeamsDiv.Children)
+            {
+                var team = teamListItem
+                    .Children.FirstOrDefault();
+
+                var teamHref = team.Attributes
+                    .Where(x => x.Name == "href")
+                    .Select(x => x.Value)
+                    .FirstOrDefault();
+
+                var teamName = team
+                    .Children.FirstOrDefault()
+                    .Attributes.Where(x => x.Name == "title")
+                    .Select(x => x.Value)
+                    .FirstOrDefault();
+
+                var newTeam = new Team
+                {
+                    Name = teamName
+                };
+            }
+
+            if (allTeamsDiv != null)
+            {
+                var imgs = allTeamsDiv.ChildNodes
+               .Where(x => x.NodeName == "img")
+               .ToList();
+            }
         }
 
         private static void SeedEuroFinals2016()
