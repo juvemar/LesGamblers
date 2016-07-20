@@ -10,9 +10,16 @@
         {
             if (this.User.IsInRole(LesGamblers.Common.GlobalConstants.AdministratorRoleName))
             {
-                <li>@Html.ActionLink("Add Game", "AddGame", "Games")</li>
-                <li>@Html.ActionLink("Update Gambler", "UpdateGambler", "Gamblers")</li>
-                <li>@Html.ActionLink("Update Game", "UpdateFinishedGame", "Games")</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span id="scissors" class="glyphicon glyphicon-user"></span> Manage <span id="caret" class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li>@Html.ActionLink("Add Game", "AddGame", "Games")</li>
+                        <li>@Html.ActionLink("Update Gambler", "UpdateGambler", "Gamblers")</li>
+                        <li>@Html.ActionLink("Update Game", "UpdateFinishedGame", "Games")</li>
+                        <li class="divider"></li>
+                        <li>@Html.ActionLink("Delete Entities", "DeleteEntities", "Home")</li>
+                    </ul>
+                </li>
             }
         }
         <li>

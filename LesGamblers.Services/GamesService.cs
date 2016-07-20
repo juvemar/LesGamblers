@@ -41,5 +41,16 @@
             this.games.Update(currentGame);
             this.games.SaveChanges();
         }
+
+        public void DeleteAll()
+        {
+            var allGames = this.GetAll().ToList();
+
+            foreach (var game in allGames)
+            {
+                this.games.MarkAsDeleted(game);
+            }
+            this.games.SaveChanges();
+        }
     }
 }

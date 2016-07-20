@@ -44,5 +44,16 @@
             this.predictions.Update(currentPrediction);
             this.predictions.SaveChanges();
         }
+
+        public void DeleteAll()
+        {
+            var allPredictions = this.GetAll().ToList();
+
+            foreach (var prediction in allPredictions)
+            {
+                this.predictions.MarkAsDeleted(prediction);
+            }
+            this.predictions.SaveChanges();
+        }
     }
 }

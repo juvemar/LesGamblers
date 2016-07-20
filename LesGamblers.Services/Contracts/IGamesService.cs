@@ -13,5 +13,7 @@
         void Add(Game game);
 
         void UpdateGame(Game game, int id);
+
+        void DeleteAll();
     }
 }

@@ -1,5 +1,6 @@
 ﻿namespace Crawler
 {
+    using System.Collections.Generic;
     using System.Linq;
 
     using AngleSharp;
@@ -9,7 +10,6 @@
     using LesGamblers.Models;
     using LesGamblers.Services;
     using LesGamblers.Services.Contracts;
-    using System.Collections.Generic;
 
     public static class StartUp
     {

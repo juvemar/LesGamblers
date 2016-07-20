@@ -232,6 +232,7 @@
     <Compile Include="Infrastructure\IHaveCustomMappings.cs" />
     <Compile Include="Infrastructure\IMapFrom.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DeleteEntitiesViewModel.cs" />
     <Compile Include="Models\Games\ListAllGamesPredictions.cs" />
     <Compile Include="Models\Gamblers\UpdateGamblerViewModel.cs" />
     <Compile Include="Models\Games\AddGameViewModel.cs" />
@@ -253,6 +254,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\common\confirmationDialogBox.js" />
     <Content Include="Scripts\games\addGame.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
@@ -324,6 +326,7 @@
     <Content Include="Views\Games\UpdateFinishedGame.cshtml" />
     <Content Include="Views\Predictions\_CheckPredictionDetails.cshtml" />
     <Content Include="Views\Gamblers\UpdateGambler.cshtml" />
+    <Content Include="Views\Home\DeleteEntities.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -13,5 +13,7 @@
         void Add(Prediction prediction);
 
         void UpdatePrediction(Prediction prediction, int id);
+
+        void DeleteAll();
     }
 }

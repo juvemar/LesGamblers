@@ -57,5 +57,27 @@
                             .ThenByDescending(g => g.FinalResultsPredicted)
                             .ToList());
         }
+
+        [HttpGet]
+        public ActionResult DeleteEntities()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEntities(DeleteEntitiesViewModel model)
+        {
+            if (model.DeleteGames)
+            {
+                this.games.DeleteAll();
+            }
+
+            if (model.DeletePredictions)
+            {
+                this.predictions.DeleteAll();   
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
