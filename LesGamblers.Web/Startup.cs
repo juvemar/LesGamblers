@@ -1,6 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
+using Crawler;
+
 [assembly: OwinStartupAttribute(typeof(LesGamblers.Web.Startup))]
 namespace LesGamblers.Web
 {
@@ -8,7 +10,8 @@ namespace LesGamblers.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            Crawler.StartUp.Main();
+            var crawler = new DataSeederEuroFinals2016();
+            crawler.CrawlTeamsData();
             ConfigureAuth(app);
         }
     }
