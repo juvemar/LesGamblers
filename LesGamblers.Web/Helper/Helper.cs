@@ -9,7 +9,7 @@
     using LesGamblers.Web.Models.Gamblers;
     using LesGamblers.Web.Models.Predictions;
 
-    public static class PointsUpdater
+    public static class Helper
     {
         public static void CheckCorrectPredictions(UpdateFinishedGameViewModel model, IPredictionsService predictions, IGamblersService gamblers)
         {
@@ -106,6 +106,18 @@
             }
 
             return 0;
+        }
+
+        public static DateTime GetValidDateTimeFromViewModel(AddGameViewModel model)
+        {
+            var year = model.Date.Year;
+            var month = model.Date.Month;
+            var day = model.Date.Day;
+            var hour = model.Date.Hour;
+            var minute = model.Date.Minute;
+            var second = model.Date.Second;
+
+            return new DateTime(year, month, day, hour, minute, second);
         }
     }
 }

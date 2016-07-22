@@ -54,10 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //model.Date = GetValidDateTime(model);
-            //model.Date = DateTime.ParseExact(model.Date.ToString().Substring(0, 24),
-            //                  "yyyy-MM-dd HH:mm:ss",
-            //                  CultureInfo.InvariantCulture);
+            model.Date = Helper.GetValidDateTimeFromViewModel(model);
 
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
@@ -78,7 +75,7 @@
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             this.games.Add(dataModel);
-            this.TempData["Notification"] = "Your game was added successfully! Good luck!";
+            this.TempData["Notification"] = "Your game was added successfully!";
 
             return RedirectToAction("Index", "Home");
         }
@@ -133,22 +130,11 @@
             var dataModel = AutoMapper.Mapper.Map<UpdateFinishedGameViewModel, LesGamblers.Models.Game>(model);
 
             this.games.UpdateGame(dataModel, model.Id);
-            PointsUpdater.CheckCorrectPredictions(model, this.predictions, this.gamblers);
+            Helper.CheckCorrectPredictions(model, this.predictions, this.gamblers);
 
             this.TempData["Notification"] = "The game was updated successfully!";
 
             return RedirectToAction("UpdateFinishedGame", "Games");
-        }
-
-        private DateTime GetValidDateTime(AddGameViewModel model)
-        {
-            var year = model.Date.Year;
-            var month = model.Date.Month;
-            var day = model.Date.Day;
-            var hours = model.Date.Hour;
-            var minutes = model.Date.Minute;
-            var seconds = model.Date.Second;
-            return new DateTime(year, month, day, hours, minutes, seconds);
         }
     }
 }
