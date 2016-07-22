@@ -53,7 +53,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            if (!this.ModelState.IsValid || model.HostTeam == model.GuestTeam)
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
 

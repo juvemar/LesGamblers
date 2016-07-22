@@ -55,6 +55,7 @@
             return this.View(gamblersModel
                             .OrderByDescending(g => g.TotalPoints)
                             .ThenByDescending(g => g.FinalResultsPredicted)
+                            .ThenByDescending(g => g.GoalscorersPredicted)
                             .ToList());
         }
 
