@@ -1,7 +1,8 @@
 ﻿$(function () {
+    debugger;
     var today = new Date();
     $('#datetimepicker1').datetimepicker({
-        minDate: today.setDate(today.getDate()),
+        minDate: today,
         format: "D.MM.YYYY HH:mm"
     });
 
