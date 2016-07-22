@@ -11,6 +11,7 @@
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
     using LesGamblers.Models;
+    using System.Globalization;
 
     public class GamesController : Controller
     {
@@ -53,13 +54,10 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //var year = model.Date.Year;
-            //var month = model.Date.Month;
-            //var day = model.Date.Day;
-            //var hours = model.Date.Hour;
-            //var minutes = model.Date.Minute;
-            //var seconds = model.Date.Second;
-            //model.Date = new DateTime(year, month, day, hours, minutes, seconds);
+            //model.Date = GetValidDateTime(model);
+            //model.Date = DateTime.ParseExact(model.Date.ToString().Substring(0, 24),
+            //                  "yyyy-MM-dd HH:mm:ss",
+            //                  CultureInfo.InvariantCulture);
 
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
@@ -140,6 +138,17 @@
             this.TempData["Notification"] = "The game was updated successfully!";
 
             return RedirectToAction("UpdateFinishedGame", "Games");
+        }
+
+        private DateTime GetValidDateTime(AddGameViewModel model)
+        {
+            var year = model.Date.Year;
+            var month = model.Date.Month;
+            var day = model.Date.Day;
+            var hours = model.Date.Hour;
+            var minutes = model.Date.Minute;
+            var seconds = model.Date.Second;
+            return new DateTime(year, month, day, hours, minutes, seconds);
         }
     }
 }
