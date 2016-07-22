@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Web.Mvc;
     using System.Web.Security;
-    using System.Data.SqlTypes.SqlDateTime;
 
     using LesGamblers.Services.Contracts;
     using LesGamblers.Web.Helper;
