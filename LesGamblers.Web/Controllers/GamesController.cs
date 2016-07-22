@@ -54,9 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //model.Date = Helper.GetValidDateTimeFromViewModel(model);
-
-            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam || DateTime.Now > model.Date)
             {
                 var allTeams = this.teams.GetAll().ToList();
 
@@ -75,7 +73,7 @@
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             this.games.Add(dataModel);
-            this.TempData["Notification"] = "Your game was added successfully!";
+            this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
             return RedirectToAction("Index", "Home");
         }
@@ -130,7 +128,7 @@
             var dataModel = AutoMapper.Mapper.Map<UpdateFinishedGameViewModel, LesGamblers.Models.Game>(model);
 
             this.games.UpdateGame(dataModel, model.Id);
-            Helper.CheckCorrectPredictions(model, this.predictions, this.gamblers);
+            PointsUpdater.CheckCorrectPredictions(model, this.predictions, this.gamblers);
 
             this.TempData["Notification"] = "The game was updated successfully!";
 
