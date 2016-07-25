@@ -24,15 +24,24 @@
             this.predictions = predictions;
         }
 
-        [HttpGet]
         public ActionResult Index()
+        {
+            return this.View();
+        }
+
+        [HttpGet]
+        [ChildActionOnly]
+        [OutputCache(Duration = 60 * 10, VaryByParam = "none")]
+        [ActionName("_AllGamblersResultsPartial")]
+        public ActionResult AllGamblersResultsPartial()
         {
             var allGamblers = this.gamblers.GetAll().ToList();
             var gamblersModel = new List<CheckGamblersPredictionsViewModel>();
 
+            var allPredictions = this.predictions.GetAll().ToList();
             foreach (var gambler in allGamblers)
             {
-                var gamblerPredictions = this.predictions.GetAll().Where(p => p.GamblerId == gambler.Id).ToList();
+                var gamblerPredictions = allPredictions.Where(p => p.GamblerId == gambler.Id).ToList();
                 var totalPoints = gamblerPredictions.Sum(p => p.TotalPoints);
                 var exactResults = gamblerPredictions.Where(p => p.FinalResultPredicted == true).Count();
                 var goalscorers = gamblerPredictions.Where(p => p.GoalscorerPredicted == true).Count();
@@ -52,7 +61,7 @@
                 gamblersModel.Add(newGambler);
             }
 
-            return this.View(gamblersModel
+            return this.PartialView("_AllGamblersResultsPartial", gamblersModel
                             .OrderByDescending(g => g.TotalPoints)
                             .ThenByDescending(g => g.FinalResultsPredicted)
                             .ThenByDescending(g => g.GoalscorersPredicted)

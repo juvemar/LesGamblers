@@ -11,7 +11,6 @@
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
     using LesGamblers.Models;
-    using System.Globalization;
 
     public class GamesController : Controller
     {
@@ -54,7 +53,8 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam || DateTime.Now > new DateTime(model.Date.Year, model.Date.Month, model.Date.Day, model.Date.Hour, model.Date.Minute, model.Date.Second))
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
+                DateTime.Now > new DateTime(model.Date.Year, model.Date.Month, model.Date.Day, model.Date.Hour, model.Date.Minute, model.Date.Second))
             {
                 var allTeams = this.teams.GetAll().ToList();
 

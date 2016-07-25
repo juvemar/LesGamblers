@@ -126,7 +126,8 @@
                 predictionResult.Goalscorer = prediction.Goalscorer;
                 predictionResult.TotalPoints = prediction.TotalPoints;
                 predictionResult.ActualResult = game.FinalResult;
-                if (game.Goalscorers.Length > 0)
+
+                if (!string.IsNullOrEmpty(game.Goalscorers))
                 {
                     predictionResult.ActualGoalscorers = game.Goalscorers;
                 }

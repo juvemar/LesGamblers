@@ -1,0 +1,80 @@
+﻿@model IEnumerable<LesGamblers.Web.Models.Gamblers.CheckGamblersPredictionsViewModel>
+
+<table class="table">
+    <tr>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.FinalResultsPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.SignsPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.GoalscorersPredicted)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.TotalPoints)
+        </th>
+        <th></th>
+    </tr>
+
+    @{
+        var index = 0;
+        foreach (var item in Model)
+        {
+            if (index % 2 == 0)
+            {
+                <tr class="info">
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FinalResultsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.SignsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.GoalscorersPredicted)
+                    </td>
+                    <td class="text-center">
+                        <strong>@Html.DisplayFor(modelItem => item.TotalPoints)</strong>
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.FinalResultsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.SignsPredicted)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.GoalscorersPredicted)
+                    </td>
+                    <td class="text-center">
+                        <strong>@Html.DisplayFor(modelItem => item.TotalPoints)</strong>
+                    </td>
+                </tr>
+            }
+            index++;
+        }
+    }
+
+</table>

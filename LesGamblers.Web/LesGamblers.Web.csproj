@@ -327,6 +327,7 @@
     <Content Include="Views\Predictions\_CheckPredictionDetails.cshtml" />
     <Content Include="Views\Gamblers\UpdateGambler.cshtml" />
     <Content Include="Views\Home\DeleteEntities.cshtml" />
+    <Content Include="Views\Home\_AllGamblersResultsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
