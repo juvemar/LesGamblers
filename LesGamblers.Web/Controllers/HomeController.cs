@@ -69,6 +69,7 @@
         }
 
         [HttpGet]
+        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult DeleteEntities()
         {
             return this.View();

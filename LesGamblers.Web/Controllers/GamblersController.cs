@@ -76,6 +76,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult UpdateGambler(UpdateGamblerViewModel model)
         {
             if (!this.ModelState.IsValid)
