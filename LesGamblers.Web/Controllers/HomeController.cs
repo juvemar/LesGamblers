@@ -30,10 +30,44 @@
         }
 
         [HttpGet]
+        public ActionResult AllGamblersResultsPartialNoCache()
+        {
+            return this.AllGamblersResults();
+        }
+
+        [HttpGet]
         [ChildActionOnly]
         [OutputCache(Duration = 60 * 10, VaryByParam = "none")]
         [ActionName("_AllGamblersResultsPartial")]
-        public ActionResult AllGamblersResultsPartial()
+        public ActionResult AllGamblersResultsPartialWithCache()
+        {
+            return this.AllGamblersResults();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
+        public ActionResult DeleteEntities()
+        {
+            return this.View();
+        }
+
+        [HttpPost]
+        public ActionResult DeleteEntities(DeleteEntitiesViewModel model)
+        {
+            if (model.DeleteGames)
+            {
+                this.games.DeleteAll();
+            }
+
+            if (model.DeletePredictions)
+            {
+                this.predictions.DeleteAll();   
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        private ActionResult AllGamblersResults()
         {
             var allGamblers = this.gamblers.GetAll().ToList();
             var gamblersModel = new List<CheckGamblersPredictionsViewModel>();
@@ -66,29 +100,6 @@
                             .ThenByDescending(g => g.FinalResultsPredicted)
                             .ThenByDescending(g => g.GoalscorersPredicted)
                             .ToList());
-        }
-
-        [HttpGet]
-        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
-        public ActionResult DeleteEntities()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public ActionResult DeleteEntities(DeleteEntitiesViewModel model)
-        {
-            if (model.DeleteGames)
-            {
-                this.games.DeleteAll();
-            }
-
-            if (model.DeletePredictions)
-            {
-                this.predictions.DeleteAll();   
-            }
-
-            return RedirectToAction("Index", "Home");
         }
     }
 }

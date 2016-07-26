@@ -39,6 +39,7 @@ namespace LesGamblers.Data.Migrations
             var admin1 = new Gambler
             {
                 UserName = "cheatGambler@gamb.bg",
+                Email = "cheatGambler@gamb.bg",
                 PhoneNumber = "0888888888",
                 FirstName = "Martin",
                 LastName = "Atanasov"
@@ -56,6 +57,7 @@ namespace LesGamblers.Data.Migrations
             var admin2 = new Gambler
             {
                 UserName = "TeodorTodorov@gamb.bg",
+                Email = "TeodorTodorov@gamb.bg",
                 PhoneNumber = "0888888888",
                 FirstName = "Teodor",
                 LastName = "Todorov"
