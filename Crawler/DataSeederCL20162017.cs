@@ -27,11 +27,15 @@
                 var team = teamListItem
                     .Children.FirstOrDefault();
 
-                var teamHref = team
+                var teamHref = "http://www.uefa.com" + team
                     .Attributes
                     .Where(x => x.Name == "href")
                     .Select(x => x.Value)
-                    .FirstOrDefault();
+                    .FirstOrDefault()
+                    .ToString();
+
+                var squadIndex = teamHref.IndexOf("index.html");
+                var playersHref = teamHref.Insert(squadIndex, "squad/");
 
                 var teamName = team
                     .Children.FirstOrDefault()
