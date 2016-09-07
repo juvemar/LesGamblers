@@ -27,11 +27,11 @@
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
-            var timeNow = DateTime.Now;
+            var startRange = DateTime.Now + new TimeSpan(1, 0, 0); // 1 hour before match start
+            var endRange = DateTime.Now + new TimeSpan(13, 0, 0, 0); // 13 days after now
             var availableGames = this.games
                                 .GetAll()
-                                //.Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > timeNow)
-                                .Where(g => string.IsNullOrEmpty(g.FinalResult))
+                                .Where(g => string.IsNullOrEmpty(g.FinalResult) && g.Date > startRange && g.Date < endRange)
                                 .OrderBy(g => g.Date)
                                 .ToList();
 

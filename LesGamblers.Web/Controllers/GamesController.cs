@@ -75,7 +75,7 @@
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("AddGame", "Games");
         }
 
         [HttpGet]

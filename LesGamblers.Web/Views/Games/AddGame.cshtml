@@ -1,8 +1,10 @@
 ﻿@model LesGamblers.Web.Models.Games.AddGameViewModel
 
+<br />
 <div class="text-center">
     <h2>Add Game</h2>
 </div>
+<br />
 
 @using (Html.BeginForm("AddGame", "Games", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
@@ -51,7 +53,6 @@
 }
 
 @section Scripts {
-    @Scripts.Render("~/bundles/bootstrap")
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.37/js/bootstrap-datetimepicker.min.js"></script>
     <script src="~/Scripts/games/addGame.js"></script>
 }

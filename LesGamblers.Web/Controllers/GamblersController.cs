@@ -4,9 +4,10 @@
     using System.Linq;
     using System.Web.Mvc;
 
+    using Microsoft.AspNet.Identity;
+
     using LesGamblers.Services.Contracts;
     using LesGamblers.Web.Models.Gamblers;
-    using Microsoft.AspNet.Identity;
 
     public class GamblersController : Controller
     {

@@ -10,7 +10,8 @@ namespace LesGamblers.Web
     {
         public void Configuration(IAppBuilder app)
         {
-            var crawler = new DataSeederEuroFinals2016();
+            //var crawler = new DataSeederEuroFinals2016();
+            var crawler = new DataSeederCL20162017();
             crawler.CrawlTeamsData();
             ConfigureAuth(app);
         }
