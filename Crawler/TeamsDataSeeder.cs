@@ -1,6 +1,7 @@
 ﻿namespace Crawler
 {
     using System.Collections.Generic;
+    using System.Linq;
 
     using LesGamblers.Data;
     using LesGamblers.Data.Repositories;
@@ -21,7 +22,7 @@
             this.TeamsService = new TeamsService(this.Repo);
         }
 
-        protected void SeedTeam(string teamName, List<string> playersNames, List<string> playersClubs)
+        protected void SeedTeam(string teamName, List<string> playersNames, List<string> playersSecondClubs, bool playerNameWithBrackets)
         {
             var newTeam = new Team
             {
@@ -32,34 +33,38 @@
             var playersCount = 0;
             foreach (var player in playersNames)
             {
-                var playersClub = playersClubs[playersCount];
+                var playersClub = playersSecondClubs[playersCount];
                 this.SeedPlayer(player, newTeam, playersClub);
                 playersCount++;
             }
         }
 
-        protected virtual void SeedPlayer(string playerData, Team team, string playersClub)
+        private void SeedPlayer(string playerData, Team team, string playersClub)
         {
             IRepository<Player> repo = new Repository<Player>(Db);
             var playersServices = new PlayersService(repo);
 
-            var formatted = playerData.Trim();
-            var bracketIndex = formatted.IndexOf('(');
-            var playerName = formatted.Substring(0, bracketIndex).Trim();
-            var bracketEndIndex = formatted.IndexOf(')');
-            var playerNumber = 0;
-            var strNumber = formatted.Substring(bracketIndex + 1, bracketEndIndex - bracketIndex - 1);
-            var parseNumber = int.TryParse(strNumber, out playerNumber);
-
             var addPlayer = new Player
             {
-                Number = playerNumber,
-                Name = playerName,
-                ClubTeam = playersClub,
+                Name = this.GetPlayerName(playerData),
+                SecondTeam = playersClub,
                 TeamId = team.Id,
-                Country = team.Name
+                CurrentTeam = team.Name
             };
             playersServices.Add(addPlayer);
+        }
+
+        private string GetPlayerName(string playerData)
+        {
+            if (playerData.Contains("("))
+            {
+                var formatted = playerData.Trim();
+                var bracketIndex = formatted.IndexOf('(');
+                var playerName = formatted.Substring(0, bracketIndex).Trim();
+                return playerName;
+            }
+
+            return playerData;
         }
     }
 }

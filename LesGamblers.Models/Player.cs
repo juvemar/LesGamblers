@@ -11,15 +11,13 @@
 
         public string Name { get; set; }
 
-        public string ClubTeam { get; set; }
-
-        public int Number { get; set; }
+        public string SecondTeam { get; set; }
 
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
 
-        public string Country { get; set; }
+        public string CurrentTeam { get; set; }
         
         public int TeamId { get; set; }
 

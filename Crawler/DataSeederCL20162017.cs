@@ -15,6 +15,11 @@
     {
         public void CrawlTeamsData()
         {
+            if (this.TeamsService.GetAll().Count() > 0)
+            {
+                return;
+            }
+
             var configuration = Configuration.Default.WithDefaultLoader();
             var browsingContext = BrowsingContext.New(configuration);
             var url = "http://www.uefa.com/uefachampionsleague/season=2017/clubs/index.html";
@@ -37,23 +42,27 @@
                 var squadIndex = teamHref.IndexOf("index.html");
                 var playersHref = teamHref.Insert(squadIndex, "squad/");
 
+                var documentCurrentTeamPlayers = browsingContext.OpenAsync(playersHref).Result;
+                var currentTeamPlayers = documentCurrentTeamPlayers
+                                .QuerySelectorAll(".medTitle a")
+                                .Select(x => x.TextContent)
+                                .ToList();
+
+                var currentTeamCountries = documentCurrentTeamPlayers
+                                .QuerySelectorAll("tr td.l")
+                                .Select(x => x.TextContent)
+                                .Where(x => x.Length == 3)
+                                .ToList();
+
                 var teamName = team
-                    .Children.FirstOrDefault()
-                    .Attributes.Where(x => x.Name == "title")
+                    .Children
+                    .FirstOrDefault()
+                    .Attributes
+                    .Where(x => x.Name == "title")
                     .Select(x => x.Value)
                     .FirstOrDefault();
 
-                var newTeam = new Team
-                {
-                    Name = teamName
-                };
-            }
-
-            if (allTeamsDiv != null)
-            {
-                var imgs = allTeamsDiv.ChildNodes
-               .Where(x => x.NodeName == "img")
-               .ToList();
+                this.SeedTeam(teamName, currentTeamPlayers, currentTeamCountries, false);
             }
         }
     }

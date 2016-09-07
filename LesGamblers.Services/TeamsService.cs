@@ -30,13 +30,5 @@
         {
             return this.teams.All().Where(x => x.Id == id).AsQueryable();
         }
-
-        public void AddPlayer(Team team, Player player)
-        {
-            var currentTeam = this.teams.GetById(team.Id);
-            currentTeam.Players.Add(player);
-            this.teams.Update(currentTeam);
-            this.teams.SaveChanges();
-        }
     }
 }

@@ -90,19 +90,19 @@
             var gameHost = game.HostTeam.Replace('_', ' ');
             var gameGuest = game.GuestTeam.Replace('_', ' ');
             var firstTeamPlayers = this.players.GetAll()
-                .Where(x => x.Country == gameHost).Select(a => new
+                .Where(x => x.CurrentTeam == gameHost).Select(a => new
                 {
                     Name = a.Name,
-                    Country = a.Country,
-                    Club = a.ClubTeam
+                    Country = a.CurrentTeam,
+                    Club = a.SecondTeam
                 })
                 .ToList();
             var secondTeamPlayers = this.players.GetAll()
-                .Where(x => x.Country == gameGuest).Select(a => new
+                .Where(x => x.CurrentTeam == gameGuest).Select(a => new
                 {
                     Name = a.Name,
-                    Country = a.Country,
-                    Club = a.ClubTeam
+                    Country = a.CurrentTeam,
+                    Club = a.SecondTeam
                 })
                 .ToList();
             return Json(new { hostPlayers = firstTeamPlayers, guestPlayers = secondTeamPlayers }, JsonRequestBehavior.AllowGet);

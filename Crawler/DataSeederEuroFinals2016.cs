@@ -15,6 +15,11 @@
     {
         public void CrawlTeamsData()
         {
+            if (this.TeamsService.GetAll().Count() > 0)
+            {
+                return;
+            }
+
             var configuration = Configuration.Default.WithDefaultLoader();
             var browsingContext = BrowsingContext.New(configuration);
 
@@ -50,7 +55,7 @@
                                 .TextContent)
                     .ToList();
 
-                this.SeedTeam(countryName, currentTeamPlayers, currentTeamPlayersClubs);
+                this.SeedTeam(countryName, currentTeamPlayers, currentTeamPlayersClubs, true);
             }
         }
     }
