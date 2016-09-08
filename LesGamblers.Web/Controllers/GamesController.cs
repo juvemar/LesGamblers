@@ -71,11 +71,11 @@
                         Value = team.Name
                     });
                 }
-                this.TempData["Notification"] = "The game was not added successfully! Please try again.";
+                this.TempData["Notification"] = "The game was not added!!!!!!!!!!!!!!!!!!!!!!!!";
                 return this.View(model);
             }
 
-            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
+            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(newModel);
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
