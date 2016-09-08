@@ -54,8 +54,7 @@
         public ActionResult AddGamePost(AddGameViewModel model)
         {
             model.Date = this.FormatDate(model.Date);
-            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
-                DateTime.Now > model.Date)
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
 
