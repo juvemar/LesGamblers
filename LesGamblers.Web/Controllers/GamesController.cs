@@ -58,8 +58,7 @@
             newModel.HostTeam = model.HostTeam;
             newModel.GuestTeam = model.GuestTeam;
             newModel.Date = new DateTime(model.Date.Value.Year, model.Date.Value.Month, model.Date.Value.Day, model.Date.Value.Hour, model.Date.Value.Minute, 0);
-            if (newModel.GuestTeam == null || newModel.HostTeam == null || newModel.HostTeam == newModel.GuestTeam ||
-                DateTime.Now > newModel.Date.Value)
+            if (newModel.GuestTeam == null || newModel.HostTeam == null || newModel.HostTeam == newModel.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
 
