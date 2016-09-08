@@ -15,7 +15,7 @@
         public int Id { get; set; }
 
         [Display(Name = "Date")]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Display(Name = "Host")]
         public string HostTeam { get; set; }

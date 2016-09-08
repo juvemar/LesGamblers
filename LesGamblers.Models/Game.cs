@@ -16,7 +16,7 @@
 
         public int Id { get; set; }
 
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Required]
         public string HostTeam { get; set; }

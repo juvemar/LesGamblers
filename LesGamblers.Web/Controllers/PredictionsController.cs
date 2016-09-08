@@ -40,7 +40,7 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.Date.Value.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
+                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' '),
                     Value = game.Id.ToString()
                 });
             }

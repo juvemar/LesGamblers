@@ -11,6 +11,7 @@
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
     using LesGamblers.Models;
+    using System.Globalization;
 
     public class GamesController : Controller
     {
@@ -54,10 +55,11 @@
         public ActionResult AddGamePost(AddGameViewModel model)
         {
             model.Date = this.FormatDate(model.Date);
-            if (DateTime.Now > model.Date.Value)
+            if (DateTime.Now > model.Date)
             {
                 this.TempData["Notification"] = "DateTime.Now > model.Date.Value";
             }
+
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
@@ -76,25 +78,24 @@
             }
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
+            dataModel.Date = this.FormatDate(model.Date);
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
             return RedirectToAction("AddGame", "Games");
         }
 
-        private DateTime FormatDate(DateTime? dateTime)
+        private DateTime FormatDate(DateTime dateTime)
         {
-            if (!dateTime.HasValue)
-            {
-                return new DateTime();
-            }
-
-            var year = dateTime.Value.Year.ToString();
-            var month = dateTime.Value.Month.ToString();
-            var day = dateTime.Value.Day.ToString();
-            var hour = dateTime.Value.Hour.ToString();
-            var minute = dateTime.Value.Minute.ToString();
-
+            var datestr = dateTime.ToString();
+            var dateSplit = datestr.Split('.').ToArray();
+            var day = dateSplit[0];
+            var month = dateSplit[1];
+            var year = dateSplit[2].Substring(0, 4);
+            var timeSplit = datestr.Split(':').ToArray();
+            var hour = timeSplit[0].Substring(timeSplit[0].Length - 2);
+            var minute = timeSplit[1];
+            
             return new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0);
         }
 
@@ -112,7 +113,7 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.Date.Value.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
+                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
                     Value = game.Id.ToString()
                 });
             }
@@ -137,7 +138,7 @@
                 {
                     model.Games.Add(new SelectListItem
                     {
-                        Text = game.Date.Value.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
+                        Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
                         Value = game.Id.ToString()
                     });
                 }
