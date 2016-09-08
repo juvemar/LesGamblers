@@ -53,23 +53,23 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
-            //    DateTime.Now > new DateTime(model.Date.Year, model.Date.Month, model.Date.Day, model.Date.Hour, model.Date.Minute, model.Date.Second))
-            //{
-            //    var allTeams = this.teams.GetAll().ToList();
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
+                DateTime.Now > new DateTime(model.Date.Year, model.Date.Month, model.Date.Day, model.Date.Hour, model.Date.Minute, model.Date.Second))
+            {
+                var allTeams = this.teams.GetAll().ToList();
 
-            //    model.Teams = new List<SelectListItem>();
-            //    foreach (var team in allTeams)
-            //    {
-            //        model.Teams.Add(new SelectListItem
-            //        {
-            //            Text = team.Name,
-            //            Value = team.Name
-            //        });
-            //    }
+                model.Teams = new List<SelectListItem>();
+                foreach (var team in allTeams)
+                {
+                    model.Teams.Add(new SelectListItem
+                    {
+                        Text = team.Name,
+                        Value = team.Name
+                    });
+                }
 
-            //    return this.View(model);
-            //}
+                return this.View(model);
+            }
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             this.games.Add(dataModel);
