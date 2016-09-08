@@ -9,12 +9,14 @@
 
     using LesGamblers.Models;
     using LesGamblers.Web.Infrastructure;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     public class AddGameViewModel : IMapFrom<Game>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
         [Display(Name = "Date")]
+        [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Host")]
