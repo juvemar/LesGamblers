@@ -54,7 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            model.Date = this.FormatDate(model.Date);
+            //model.Date = this.FormatDate(model.Date);
             if (DateTime.Now > model.Date)
             {
                 this.TempData["Notification"] = "DateTime.Now > model.Date.Value";
@@ -87,14 +87,11 @@
 
         private DateTime FormatDate(DateTime dateTime)
         {
-            var datestr = dateTime.ToString();
-            var dateSplit = datestr.Split('.').ToArray();
-            var day = dateSplit[0];
-            var month = dateSplit[1];
-            var year = dateSplit[2].Substring(0, 4);
-            var timeSplit = datestr.Split(':').ToArray();
-            var hour = timeSplit[0].Substring(timeSplit[0].Length - 2);
-            var minute = timeSplit[1];
+            var day = dateTime.Day.ToString();
+            var month = dateTime.Month.ToString();
+            var year = dateTime.Year.ToString();
+            var hour = dateTime.Hour.ToString();
+            var minute = dateTime.Minute.ToString();
             
             return new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0);
         }
