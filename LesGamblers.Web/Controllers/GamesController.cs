@@ -53,7 +53,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            model.Date = this.FormatDate(model.Date);
+            model.Date = DateTime.Now + new TimeSpan(5, 0, 0);
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
@@ -108,7 +108,7 @@
             {
                 model.Games.Add(new SelectListItem
                 {
-                    Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
+                    Text = game.Date.Value.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
                     Value = game.Id.ToString()
                 });
             }
@@ -133,7 +133,7 @@
                 {
                     model.Games.Add(new SelectListItem
                     {
-                        Text = game.Date.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
+                        Text = game.Date.Value.ToString("dd.MM.yy HH:mm") + "  |  " + game.HostTeam.Replace('_', ' ') + " - " + game.GuestTeam.Replace('_', ' ') + " " + game.FinalResult,
                         Value = game.Id.ToString()
                     });
                 }

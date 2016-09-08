@@ -15,15 +15,12 @@
         public int Id { get; set; }
 
         [Display(Name = "Date")]
-        //[Required]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         [Display(Name = "Host")]
-        //[Required]
         public string HostTeam { get; set; }
 
         [Display(Name = "Guest")]
-        //[Required]
         public string GuestTeam { get; set; }
 
         public List<SelectListItem> Teams { get; set; }
