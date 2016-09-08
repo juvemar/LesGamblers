@@ -53,7 +53,9 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
+            System.Diagnostics.Debug.WriteLine(model.Date + " - before format");
             model.Date = this.FormatDate(model.Date);
+            System.Diagnostics.Debug.WriteLine(model.Date + " - after format");
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
                 DateTime.Now > model.Date)
             {
@@ -85,6 +87,7 @@
             {
                 return new DateTime();
             }
+
             var year = dateTime.Value.Year;
             var month = dateTime.Value.Month;
             var day = dateTime.Value.Day;
