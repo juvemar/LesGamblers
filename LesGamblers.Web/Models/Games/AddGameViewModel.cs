@@ -16,7 +16,7 @@
 
         [Display(Name = "Date")]
         //[Required]
-        public DateTime? Date { get; set; }
+        public DateTime Date { get; set; }
 
         [Display(Name = "Host")]
         //[Required]

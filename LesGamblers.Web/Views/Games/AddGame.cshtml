@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                        @Html.TextBoxFor(model => model.Date, new { @class = "col-md-2 form-control datetimepicker-padd-left" })
+                    @Html.TextBoxFor(model => model.Date, new { @type = "datetime" })
                         
                 </div>
             </div>
