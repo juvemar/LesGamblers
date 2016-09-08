@@ -68,7 +68,7 @@
                         Value = team.Name
                     });
                 }
-
+                this.TempData["Notification"] = "The game was not added successfully! Please try again.";
                 return this.View(model);
             }
 
