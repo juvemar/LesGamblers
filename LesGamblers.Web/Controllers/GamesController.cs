@@ -54,11 +54,11 @@
         public ActionResult AddGamePost(AddGameViewModel model)
         {
             model.Date = this.FormatDate(model.Date);
-            AddGameViewModel newModel = new AddGameViewModel();
-            newModel.HostTeam = model.HostTeam;
-            newModel.GuestTeam = model.GuestTeam;
-            newModel.Date = new DateTime(model.Date.Value.Year, model.Date.Value.Month, model.Date.Value.Day, model.Date.Value.Hour, model.Date.Value.Minute, 0);
-            if (newModel.GuestTeam == null || newModel.HostTeam == null || newModel.HostTeam == newModel.GuestTeam)
+            if (DateTime.Now > model.Date.Value)
+            {
+                this.TempData["Notification"] = "DateTime.Now > model.Date.Value";
+            }
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
 
@@ -71,11 +71,11 @@
                         Value = team.Name
                     });
                 }
-                this.TempData["Notification"] = "The game was not added!!!!!!!!!!!!!!!!!!!!!!!!";
+
                 return this.View(model);
             }
 
-            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(newModel);
+            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
@@ -89,13 +89,13 @@
                 return new DateTime();
             }
 
-            var year = dateTime.Value.Year;
-            var month = dateTime.Value.Month;
-            var day = dateTime.Value.Day;
-            var hour = dateTime.Value.Hour;
-            var minute = dateTime.Value.Minute;
+            var year = dateTime.Value.Year.ToString();
+            var month = dateTime.Value.Month.ToString();
+            var day = dateTime.Value.Day.ToString();
+            var hour = dateTime.Value.Hour.ToString();
+            var minute = dateTime.Value.Minute.ToString();
 
-            return new DateTime(year, month, day, hour, minute, 0);
+            return new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0);
         }
 
         [HttpGet]
