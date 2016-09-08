@@ -53,8 +53,9 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            model.Date = DateTime.Now + new TimeSpan(5, 0, 0);
-            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
+            model.Date = this.FormatDate(model.Date);
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam ||
+                DateTime.Now > model.Date.Value)
             {
                 var allTeams = this.teams.GetAll().ToList();
 
