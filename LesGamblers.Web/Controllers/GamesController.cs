@@ -57,7 +57,7 @@
             //model.Date = this.FormatDate(model.Date);
             if (DateTime.Now > model.Date)
             {
-                this.TempData["Notification"] = "DateTime.Now > model.Date.Value";
+                this.TempData["Notification"] = "DateTime.Now > model.Date";
             }
 
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
@@ -77,8 +77,14 @@
                 return this.View(model);
             }
 
-            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
-            dataModel.Date = this.FormatDate(model.Date);
+            //var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
+            //dataModel.Date = this.FormatDate(model.Date);
+            var dataModel = new Game()
+            {
+                Date = this.FormatDate(model.Date),
+                HostTeam = model.HostTeam,
+                GuestTeam = model.GuestTeam
+            };
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 

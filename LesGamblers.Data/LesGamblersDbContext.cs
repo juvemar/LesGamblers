@@ -32,7 +32,7 @@
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
             modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
-            modelBuilder.Entity<Game>().Property(f => f.Date).HasColumnType("datetime2");
+            //modelBuilder.Entity<Game>().Property(f => f.Date).HasColumnType("datetime2");
 
             base.OnModelCreating(modelBuilder);
         }

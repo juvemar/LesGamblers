@@ -16,7 +16,6 @@
         public int Id { get; set; }
 
         [Display(Name = "Date")]
-        [Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Host")]

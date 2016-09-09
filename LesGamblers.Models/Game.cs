@@ -16,7 +16,7 @@
 
         public int Id { get; set; }
 
-        [Column(TypeName = "datetime2")]
+        //[Column(TypeName = "datetime2")]
         public DateTime Date { get; set; }
 
         [Required]
