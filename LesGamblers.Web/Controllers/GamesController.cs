@@ -54,7 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //model.Date = this.FormatDate(model.Date);
+            model.Date = DateTime.Now + new TimeSpan(1, 0, 0, 0);
             if (DateTime.Now > model.Date)
             {
                 this.TempData["Notification"] = "DateTime.Now > model.Date";
@@ -77,14 +77,8 @@
                 return this.View(model);
             }
 
-            //var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
+            var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
             //dataModel.Date = this.FormatDate(model.Date);
-            var dataModel = new Game()
-            {
-                Date = this.FormatDate(model.Date),
-                HostTeam = model.HostTeam,
-                GuestTeam = model.GuestTeam
-            };
             this.games.Add(dataModel);
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
