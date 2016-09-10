@@ -15,7 +15,7 @@
     {
         public int Id { get; set; }
 
-        [Display(Name = "Date(in format mm/dd/yyyy hh:mm)")]
+        [Display(Name = "Date(in format mm.dd.yyyy hh:mm)")]
         public DateTime Date { get; set; }
 
         [Display(Name = "Host")]

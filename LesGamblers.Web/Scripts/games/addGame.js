@@ -14,6 +14,6 @@
 $(function () {
     debugger;
     var today = new Date(new Date().getTime() + 24 * 60 * 60 * 1000);
-    var strDate = today.getDate() + '.' + (today.getMonth() + 1) + '.' + today.getFullYear() + ' ' + today.getHours() + ':' + today.getMinutes();
+    var strDate = (today.getMonth() + 1) + '.' + today.getDate() + '.' + today.getFullYear() + ' ' + today.getHours() + ':' + today.getMinutes();
     $('#matchDate-input').val(strDate);
 });
