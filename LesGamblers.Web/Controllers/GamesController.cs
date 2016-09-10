@@ -54,16 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            //model.Date = new DateTime(model.Date.Year, model.Date.Month, 13, 21, 45, 0);
-            if (model.Date.Year == 2016)
-            {
-                this.TempData["Notification"] = "Godinata e 2016 int";
-            }
-            if (DateTime.Now > model.Date)
-            {
-                this.TempData["Notification"] = "DateTime.Now > model.Date";
-            }
-
+            model.Date = this.FormatDate(model.Date);
             if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
             {
                 var allTeams = this.teams.GetAll().ToList();
@@ -91,13 +82,10 @@
 
         private DateTime FormatDate(DateTime dateTime)
         {
-            var day = dateTime.Day.ToString();
-            var month = dateTime.Month.ToString();
-            var year = dateTime.Year.ToString();
-            var hour = dateTime.Hour.ToString();
-            var minute = dateTime.Minute.ToString();
-            
-            return new DateTime(int.Parse(year), int.Parse(month), int.Parse(day), int.Parse(hour), int.Parse(minute), 0);
+            var day = dateTime.Month;
+            var month = dateTime.Day;
+
+            return new DateTime(dateTime.Year, month, day, dateTime.Hour, dateTime.Minute, 0);
         }
 
         [HttpGet]
