@@ -1,11 +1,12 @@
 ﻿namespace LesGamblers.Data
 {
     using System.Data.Entity;
+    using System.Data.Entity.ModelConfiguration.Conventions;
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
     using LesGamblers.Models;
-    using System.Data.Entity.ModelConfiguration.Conventions;
+
     public class LesGamblersDbContext : IdentityDbContext<Gambler>, ILesGamblersDbContext
     {
         public LesGamblersDbContext()
