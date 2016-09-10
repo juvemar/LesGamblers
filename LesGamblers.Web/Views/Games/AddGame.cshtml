@@ -35,8 +35,12 @@
             <div class="row">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                    @Html.TextBoxFor(model => model.Date, new { @type = "datetime", id="matchDate-input" })
-                        
+                    <div class='input-group date' id='datetimepicker1'>
+                        @Html.TextBoxFor(model => model.Date, new { @class = "col-md-2 form-control datetimepicker-padd-left" })
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
+                    </div> 
                 </div>
             </div>
         </div>
