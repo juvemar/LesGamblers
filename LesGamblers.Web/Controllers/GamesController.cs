@@ -54,7 +54,11 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            model.Date = new DateTime(2016, model.Date.Month, 13, 21, 45, 0);
+            //model.Date = new DateTime(model.Date.Year, model.Date.Month, 13, 21, 45, 0);
+            if (model.Date.Year == 2016)
+            {
+                this.TempData["Notification"] = "Godinata e 2016 int";
+            }
             if (DateTime.Now > model.Date)
             {
                 this.TempData["Notification"] = "DateTime.Now > model.Date";
