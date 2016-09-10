@@ -54,7 +54,7 @@
         [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
         public ActionResult AddGamePost(AddGameViewModel model)
         {
-            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam)
+            if (model.GuestTeam == null || model.HostTeam == null || model.HostTeam == model.GuestTeam || ValidateDate(model.Date))
             {
                 var allTeams = this.teams.GetAll().ToList();
 
@@ -77,6 +77,20 @@
             this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
             return RedirectToAction("AddGame", "Games");
+        }
+
+        private bool ValidateDate(DateTime datetime)
+        {
+            if (datetime.Day > 12 || datetime.Day < DateTime.UtcNow.Month)
+            {
+                return false;
+            }
+            else if (datetime.Month > 31)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         [HttpGet]
