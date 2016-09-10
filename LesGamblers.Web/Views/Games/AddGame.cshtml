@@ -31,17 +31,10 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class='input-group date' id='datetimepicker1'>
-                        @Html.TextBoxFor(model => model.Date, new { @class = "col-md-2 form-control datetimepicker-padd-left" })
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
-                    </div> 
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Date, new { @type = "datetime", id = "matchDate-input", @class = "col-md-2 form-control", placeholder = "MM/DD/YYYY HH:MM" })
             </div>
         </div>
 
