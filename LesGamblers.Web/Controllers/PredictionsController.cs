@@ -24,6 +24,7 @@
         }
 
         [Authorize]
+        [OutputCache(Duration = 60 * 60, VaryByParam = "none")]
         [HttpGet]
         public ActionResult AddPrediction(AddPredictionViewModel model)
         {
