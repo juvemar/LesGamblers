@@ -84,7 +84,7 @@
         public ActionResult UpdateFinishedGame(UpdateFinishedGameViewModel model)
         {
             var allTeams = this.games.GetAll()
-                            .Where(g => g.Date < DateTime.Now)
+                            //.Where(g => g.Date < DateTime.Now)
                             .ToList()
                             .OrderBy(g => g.Date);
 
