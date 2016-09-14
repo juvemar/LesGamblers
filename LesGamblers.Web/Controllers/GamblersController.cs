@@ -68,7 +68,7 @@
             {
                 model.AllGamblers.Add(new SelectListItem
                     {
-                        Text = gambler.FirstName + " " + gambler.LastName,
+                        Text = gambler.FirstName + " " + gambler.LastName + " | " + gambler.Email,
                         Value = gambler.UserName
                     });
             }
