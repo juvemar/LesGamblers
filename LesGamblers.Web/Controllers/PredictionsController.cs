@@ -24,9 +24,15 @@
         }
 
         [Authorize]
-        [OutputCache(Duration = 60 * 60, VaryByParam = "none")]
         [HttpGet]
-        public ActionResult AddPrediction(AddPredictionViewModel model)
+        public ActionResult AddPrediction()
+        {
+            return this.View();
+        }
+
+        [ChildActionOnly]
+        [OutputCache(Duration = 60 * 60)]
+        public ActionResult AddPredictionCachedData()
         {
             var startRange = DateTime.Now + new TimeSpan(1, 0, 0); // 1 hour before match start
             var endRange = DateTime.Now + new TimeSpan(13, 0, 0, 0); // 13 days after now
@@ -36,6 +42,7 @@
                                 .OrderBy(g => g.Date)
                                 .ToList();
 
+            AddPredictionViewModel model = new AddPredictionViewModel();
             model.Games = new List<SelectListItem>();
             foreach (var game in availableGames)
             {

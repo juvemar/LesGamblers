@@ -328,6 +328,8 @@
     <Content Include="Views\Gamblers\UpdateGambler.cshtml" />
     <Content Include="Views\Home\DeleteEntities.cshtml" />
     <Content Include="Views\Home\_AllGamblersResultsPartial.cshtml" />
+    <Content Include="Views\Predictions\AddPredictionCachedData.cshtml" />
+    <Content Include="Views\Predictions\_AddPredictionCachedDataPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
