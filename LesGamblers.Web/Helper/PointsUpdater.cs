@@ -120,7 +120,10 @@
                     else
                     {
                         scorersGoalsCount[scorer]++;
-                        mostGoals = scorersGoalsCount[scorer]; 
+                        if (mostGoals < scorersGoalsCount[scorer])
+                        {
+                            mostGoals = scorersGoalsCount[scorer]; 
+                        }
                     }
                 }
 
