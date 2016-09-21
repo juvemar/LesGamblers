@@ -97,6 +97,7 @@
             var game = this.games.GetById(int.Parse(gameId)).FirstOrDefault();
             var gameHost = game.HostTeam.Replace('_', ' ');
             var gameGuest = game.GuestTeam.Replace('_', ' ');
+
             var firstTeamPlayers = this.players.GetAll()
                 .Where(x => x.CurrentTeam == gameHost).Select(a => new
                 {
@@ -113,6 +114,7 @@
                     Club = a.SecondTeam
                 })
                 .ToList();
+
             return Json(new { hostPlayers = firstTeamPlayers, guestPlayers = secondTeamPlayers }, JsonRequestBehavior.AllowGet);
         }
 

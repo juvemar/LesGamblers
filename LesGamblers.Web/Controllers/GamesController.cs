@@ -10,8 +10,6 @@
     using LesGamblers.Web.Helper;
     using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
-    using LesGamblers.Models;
-    using System.Globalization;
 
     public class GamesController : Controller
     {
@@ -72,10 +70,9 @@
             }
 
             var dataModel = AutoMapper.Mapper.Map<AddGameViewModel, LesGamblers.Models.Game>(model);
-            //dataModel.Date = this.FormatDate(model.Date);
             this.games.Add(dataModel);
-            this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
 
+            this.TempData["Notification"] = model.HostTeam + " - " + model.GuestTeam + " was added successfully!";
             return RedirectToAction("AddGame", "Games");
         }
 
@@ -127,12 +124,10 @@
             }
 
             var dataModel = AutoMapper.Mapper.Map<UpdateFinishedGameViewModel, LesGamblers.Models.Game>(model);
-
             this.games.UpdateGame(dataModel, model.Id);
             PointsUpdater.CheckCorrectPredictions(model, this.predictions, this.gamblers);
 
             this.TempData["Notification"] = "The game was updated successfully!";
-
             return RedirectToAction("UpdateFinishedGame", "Games");
         }
     }

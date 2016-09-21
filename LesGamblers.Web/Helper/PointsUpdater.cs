@@ -5,8 +5,8 @@
     using System.Linq;
 
     using LesGamblers.Services.Contracts;
-    using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
+    using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Predictions;
 
     public static class PointsUpdater
@@ -112,18 +112,15 @@
                     if (!scorersGoalsCount.ContainsKey(scorer))
                     {
                         scorersGoalsCount.Add(scorer, 1);
-                        if (mostGoals < 1)
-	                    {
-		                     mostGoals = 1;
-	                    }
                     }
                     else
                     {
                         scorersGoalsCount[scorer]++;
-                        if (mostGoals < scorersGoalsCount[scorer])
-                        {
-                            mostGoals = scorersGoalsCount[scorer]; 
-                        }
+                    }
+
+                    if (mostGoals < scorersGoalsCount[scorer])
+                    {
+                        mostGoals = scorersGoalsCount[scorer];
                     }
                 }
 
