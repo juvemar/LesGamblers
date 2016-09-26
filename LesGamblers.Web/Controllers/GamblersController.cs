@@ -11,6 +11,7 @@
 
     public class GamblersController : Controller
     {
+        private const int NumberPredictionsToShow = 16;
         private IGamblersService gamblers;
         private IGamesService games;
 
@@ -23,11 +24,13 @@
         [HttpGet]
         public ActionResult CheckGamblersPredictions()
         {
-            var model = new ListGamblersViewModel();
-
             var allDataGames = this.games.GetAll()
+                .OrderByDescending(g => g.Date)
+                .Take(NumberPredictionsToShow)
                 .OrderBy(g => g.Date)
                 .ToList();
+
+            var model = new ListGamblersViewModel();
             model.AllGames = new List<SelectListItem>();
             foreach (var game in allDataGames)
             {
