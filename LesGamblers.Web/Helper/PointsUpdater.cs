@@ -95,6 +95,10 @@
             {
                 return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
             }
+            else if (string.IsNullOrEmpty(predictedGoalscorer))
+            {
+                return LesGamblers.Common.GlobalConstants.ZeroPoints;
+            }
 
             var actualGoalscorers = new string[predictedGoalscorer.Where(x => x == ',').Count() + 1];
             if (model.Goalscorers != null)
@@ -127,11 +131,11 @@
                 var topScorers = scorersGoalsCount.Where(x => x.Value == mostGoals).Select(x => x.Key).ToList();
                 if (topScorers.Contains(predictedGoalscorer))
                 {
-                    return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;                    
+                    return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
                 }
             }
 
-            return 0;
+            return LesGamblers.Common.GlobalConstants.ZeroPoints;
         }
     }
 }

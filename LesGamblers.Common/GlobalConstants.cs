@@ -7,5 +7,7 @@
         public const int ExactFinalResultPredictionPoints = 5;
 
         public const int SignFinalResultOrGoalscorerPredictionPoints = 2;
+
+        public const int ZeroPoints = 0;
     }
 }
