@@ -31,7 +31,7 @@
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 60 * 60)]
+        [OutputCache(Duration = 60 * 5)]
         public ActionResult AddPredictionCachedData()
         {
             var startRange = DateTime.Now + new TimeSpan(1, 0, 0); // 1 hour before match start
