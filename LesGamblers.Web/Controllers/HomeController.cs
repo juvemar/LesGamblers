@@ -69,7 +69,7 @@
 
         private ActionResult AllGamblersResults()
         {
-            var allGamblers = this.gamblers.GetAll().ToList();
+            var allGamblers = this.gamblers.GetAll().Where(x => x.Predictions.Count > 0).ToList();
             var gamblersModel = new List<CheckGamblersPredictionsViewModel>();
 
             var allPredictions = this.predictions.GetAll().ToList();

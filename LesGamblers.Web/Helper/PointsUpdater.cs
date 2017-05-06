@@ -5,8 +5,8 @@
     using System.Linq;
 
     using LesGamblers.Services.Contracts;
-    using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Gamblers;
+    using LesGamblers.Web.Models.Games;
     using LesGamblers.Web.Models.Predictions;
 
     public static class PointsUpdater
@@ -95,6 +95,10 @@
             {
                 return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
             }
+            else if (string.IsNullOrEmpty(predictedGoalscorer))
+            {
+                return LesGamblers.Common.GlobalConstants.ZeroPoints;
+            }
 
             var actualGoalscorers = new string[predictedGoalscorer.Where(x => x == ',').Count() + 1];
             if (model.Goalscorers != null)
@@ -112,29 +116,26 @@
                     if (!scorersGoalsCount.ContainsKey(scorer))
                     {
                         scorersGoalsCount.Add(scorer, 1);
-                        if (mostGoals < 1)
-	                    {
-		                     mostGoals = 1;
-	                    }
                     }
                     else
                     {
                         scorersGoalsCount[scorer]++;
-                        if (mostGoals < scorersGoalsCount[scorer])
-                        {
-                            mostGoals = scorersGoalsCount[scorer]; 
-                        }
+                    }
+
+                    if (mostGoals < scorersGoalsCount[scorer])
+                    {
+                        mostGoals = scorersGoalsCount[scorer];
                     }
                 }
 
                 var topScorers = scorersGoalsCount.Where(x => x.Value == mostGoals).Select(x => x.Key).ToList();
                 if (topScorers.Contains(predictedGoalscorer))
                 {
-                    return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;                    
+                    return LesGamblers.Common.GlobalConstants.SignFinalResultOrGoalscorerPredictionPoints;
                 }
             }
 
-            return 0;
+            return LesGamblers.Common.GlobalConstants.ZeroPoints;
         }
     }
 }
