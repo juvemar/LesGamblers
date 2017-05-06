@@ -23,7 +23,14 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Gamble", "AddPrediction", "Predictions")</li>
-                    <li>@Html.ActionLink("Check Out", "CheckGamblersPredictions", "Gamblers")</li>
+                    @{ // Delete this bullshit @if when CL 2017 finishes and restrict CheckOut function on match days
+                        var today = DateTime.Now.Date;
+                        if (today != new DateTime(2017, 05, 09) && today != new DateTime(2017, 05, 10) && today != new DateTime(2017, 06, 03) ||
+                            User.IsInRole(LesGamblers.Common.GlobalConstants.AdministratorRoleName))
+                        {
+                            <li>@Html.ActionLink("Check Out", "CheckGamblersPredictions", "Gamblers")</li>
+                        }
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
