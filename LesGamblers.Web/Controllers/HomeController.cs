@@ -44,29 +44,6 @@
             return this.AllGamblersResults();
         }
 
-        [HttpGet]
-        [Authorize(Roles = LesGamblers.Common.GlobalConstants.AdministratorRoleName)]
-        public ActionResult DeleteEntities()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
-        public ActionResult DeleteEntities(DeleteEntitiesViewModel model)
-        {
-            if (model.DeleteGames)
-            {
-                this.games.DeleteAll();
-            }
-
-            if (model.DeletePredictions)
-            {
-                this.predictions.DeleteAll();   
-            }
-
-            return RedirectToAction("Index", "Home");
-        }
-
         private ActionResult AllGamblersResults()
         {
             var allGamblers = this.gamblers.GetAll().Where(x => x.Predictions.Count > 0).ToList();

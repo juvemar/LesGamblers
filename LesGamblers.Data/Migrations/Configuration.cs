@@ -6,7 +6,7 @@ namespace LesGamblers.Data.Migrations
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity;
 
-    using LesGamblers.Models;
+    using Models;
 
     public sealed class Configuration : DbMigrationsConfiguration<LesGamblers.Data.LesGamblersDbContext>
     {

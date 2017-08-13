@@ -5,7 +5,6 @@
     using Data;
     using LesGamblers.Services.Contracts;
     using Models;
-    using System.Collections.Generic;
 
     public class GamesService : IGamesService
     {
@@ -27,6 +26,11 @@
             return this.games.All();
         }
 
+        public IQueryable<Game> GetAllWithDeleted()
+        {
+            return this.games.AllWithDeleted();
+        }
+
         public IQueryable<Game> GetById(int id)
         {
             return this.games.All().Where(x => x.Id == id).AsQueryable();
@@ -42,13 +46,20 @@
             this.games.SaveChanges();
         }
 
-        public void DeleteAll()
+        public void DeleteAll(bool hardDelete)
         {
-            var allGames = this.GetAll().ToList();
+            var allGames = this.GetAllWithDeleted().ToList();
 
             foreach (var game in allGames)
             {
-                this.games.MarkAsDeleted(game);
+                if (hardDelete)
+                {
+                    this.games.Delete(game);
+                }
+                else
+                {
+                    this.games.MarkAsDeleted(game);
+                }
             }
             this.games.SaveChanges();
         }

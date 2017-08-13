@@ -26,9 +26,32 @@
             return this.teams.All();
         }
 
+        public IQueryable<Team> GetAllWithDeleted()
+        {
+            return this.teams.AllWithDeleted();
+        }
+
         public IQueryable<Team> GetById(int id)
         {
             return this.teams.All().Where(x => x.Id == id).AsQueryable();
+        }
+
+        public void DeleteAll(bool hardDelete)
+        {
+            var allTeams = this.GetAllWithDeleted().ToList();
+
+            foreach (var team in allTeams)
+            {
+                if (hardDelete)
+                {
+                    this.teams.Delete(team);
+                }
+                else
+                {
+                    this.teams.MarkAsDeleted(team);
+                }
+            }
+            this.teams.SaveChanges();
         }
     }
 }

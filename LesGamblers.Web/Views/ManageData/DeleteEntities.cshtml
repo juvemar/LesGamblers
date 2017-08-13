@@ -3,7 +3,7 @@
     ViewBag.Title = "DeleteEntities";
 }
 
-@using (Html.BeginForm("DeleteEntities", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("DeleteEntities", "ManageData", FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
 {
     <h3>Select entities to delete from the Database</h3>
 
@@ -22,6 +22,33 @@
             <label class="c-input c-checkbox">
                 @Html.CheckBoxFor(m => m.DeletePredictions, new { type = "checkbox" })
                 @Html.LabelFor(m => m.DeletePredictions)
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls col-md-offset-1">
+            <label class="c-input c-checkbox">
+                @Html.CheckBoxFor(m => m.DeletePlayers, new { type = "checkbox" })
+                @Html.LabelFor(m => m.DeletePlayers)
+            </label>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls col-md-offset-1">
+            <label class="c-input c-checkbox">
+                @Html.CheckBoxFor(m => m.DeleteTeams, new { type = "checkbox" })
+                @Html.LabelFor(m => m.DeleteTeams)
+            </label>
+        </div>
+    </div>
+
+    <hr />
+
+    <div class="control-group">
+        <div class="controls col-md-offset-1">
+            <label class="c-input c-checkbox">
+                @Html.CheckBoxFor(m => m.HardDelete, new { type = "checkbox" })
+                @Html.LabelFor(m => m.HardDelete)
             </label>
         </div>
     </div>

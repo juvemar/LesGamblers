@@ -14,6 +14,8 @@
 
         void UpdateGame(Game game, int id);
 
-        void DeleteAll();
+        void DeleteAll(bool hardDelete);
+
+        IQueryable<Game> GetAllWithDeleted();
     }
 }

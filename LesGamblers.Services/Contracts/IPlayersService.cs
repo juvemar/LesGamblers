@@ -11,5 +11,9 @@
         IQueryable<Player> GetById(int id);
 
         void Add(Player player);
+
+        void DeleteAll(bool hardDelete);
+
+        IQueryable<Player> GetAllWithDeleted();
     }
 }

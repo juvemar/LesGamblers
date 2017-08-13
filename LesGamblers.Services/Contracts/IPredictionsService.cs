@@ -14,6 +14,8 @@
 
         void UpdatePrediction(Prediction prediction, int id);
 
-        void DeleteAll();
+        void DeleteAll(bool hardDelete);
+
+        IQueryable<Prediction> GetAllWithDeleted();
     }
 }

@@ -11,5 +11,9 @@
         IQueryable<Team> GetById(int id);
 
         void Add(Team team);
+
+        void DeleteAll(bool hardDelete);
+
+        IQueryable<Team> GetAllWithDeleted();
     }
 }

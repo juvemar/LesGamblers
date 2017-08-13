@@ -26,6 +26,11 @@
             return this.predictions.All();
         }
 
+        public IQueryable<Prediction> GetAllWithDeleted()
+        {
+            return this.predictions.AllWithDeleted();
+        }
+
         public IQueryable<Prediction> GetById(int id)
         {
             return this.predictions.All().Where(x => x.Id == id).AsQueryable();
@@ -45,13 +50,20 @@
             this.predictions.SaveChanges();
         }
 
-        public void DeleteAll()
+        public void DeleteAll(bool hardDelete)
         {
-            var allPredictions = this.GetAll().ToList();
+            var allPredictions = this.GetAllWithDeleted().ToList();
 
             foreach (var prediction in allPredictions)
             {
-                this.predictions.MarkAsDeleted(prediction);
+                if (hardDelete)
+                {
+                    this.predictions.Delete(prediction);
+                }
+                else
+                {
+                    this.predictions.MarkAsDeleted(prediction);
+                }
             }
             this.predictions.SaveChanges();
         }

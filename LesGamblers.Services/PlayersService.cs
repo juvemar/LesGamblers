@@ -3,7 +3,7 @@
     using System.Linq;
 
     using Data;
-    using LesGamblers.Services.Contracts;
+    using Contracts;
     using Models;
 
     public class PlayersService : IPlayersService
@@ -26,9 +26,33 @@
             return this.players.All();
         }
 
+        public IQueryable<Player> GetAllWithDeleted()
+        {
+            return this.players.AllWithDeleted();
+        }
+
         public IQueryable<Player> GetById(int id)
         {
             return this.players.All().Where(x => x.Id == id).AsQueryable();
         }
+
+        public void DeleteAll(bool hardDelete)
+        {
+            var allPlayers = this.GetAllWithDeleted().ToList();
+
+            foreach (var player in allPlayers)
+            {
+                if (hardDelete)
+                {
+                    this.players.Delete(player);
+                }
+                else
+                {
+                    this.players.MarkAsDeleted(player);
+                }
+            }
+            this.players.SaveChanges();
+        }
+
     }
 }
