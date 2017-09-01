@@ -1,1 +1,0 @@
-In TeamsDataSeeded take all players as static field and check if everyone is in the database or needs to be added.
