@@ -12,10 +12,12 @@
     public class Gambler : IdentityUser, IDeletableEntity
     {
         private ICollection<Prediction> predictions;
+        private ICollection<Leage> leages;
 
         public Gambler()
         {
             this.predictions = new HashSet<Prediction>();
+            this.leages = new HashSet<Leage>();
         }
         
         [Required]
@@ -40,6 +42,12 @@
         public bool IsDeleted { get; set; }
 
         public DateTime? DeletedOn { get; set; }
+
+        public virtual ICollection<Leage> Leages
+        {
+            get { return this.leages; }
+            set { this.leages = value; }
+        }
 
         public ClaimsIdentity GenerateUserIdentity(UserManager<Gambler> manager)
         {

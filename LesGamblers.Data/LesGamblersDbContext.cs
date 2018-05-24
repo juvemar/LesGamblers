@@ -5,7 +5,7 @@
 
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    using LesGamblers.Models;
+    using Models;
 
     public class LesGamblersDbContext : IdentityDbContext<Gambler>, ILesGamblersDbContext
     {
@@ -21,6 +21,8 @@
         public virtual IDbSet<Team> Teams { get; set; }
 
         public virtual IDbSet<Player> Players { get; set; }
+
+        public virtual IDbSet<Leage> Leages { get; set; }
 
         public override IDbSet<Gambler> Users { get; set; }
 
