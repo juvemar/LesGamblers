@@ -78,8 +78,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSeederCL1718.cs" />
     <Compile Include="TeamsDataSeeder.cs" />
-    <Compile Include="DataSeederCL20162017.cs" />
+    <Compile Include="DataSeederCL1617.cs" />
     <Compile Include="DataSeederEuroFinals2016.cs" />
     <Compile Include="ICrawler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
